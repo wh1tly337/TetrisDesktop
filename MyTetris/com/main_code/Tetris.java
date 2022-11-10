@@ -1,3 +1,5 @@
+package com.main_code;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -21,7 +23,7 @@ public class Tetris extends JFrame {
         add(board);
         board.start();
 
-        setTitle("Tetris");
+        setTitle("com.main_code.Tetris");
         setSize(200, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

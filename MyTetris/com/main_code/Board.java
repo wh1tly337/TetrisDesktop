@@ -1,4 +1,6 @@
-import Shape.Tetrominoe;
+package com.main_code;
+
+import com.main_code.Shape.Tetrominoe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,8 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-public class Board extends JPanel {
 
+public class Board extends JPanel {
     private final int BOARD_WIDTH = 10;
     private final int BOARD_HEIGHT = 22;
     private final int PERIOD_INTERVAL = 300;

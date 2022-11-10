@@ -1,3 +1,5 @@
+package com.main_code;
+
 import java.util.Random;
 
 public class Shape {
