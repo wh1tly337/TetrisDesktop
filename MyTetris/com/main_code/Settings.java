@@ -12,20 +12,23 @@ public class Settings extends JFrame {
         JPanel panel = new JPanel();
         getContentPane().add(panel);
 
-//        JButton startBtn = new JButton("Start Game");
-//        JButton settingsBtn = new JButton("Game Settings");
-//        JButton closeBtn = new JButton("Close The Game");
-//        startBtn.setBounds(162, 200, 225, 75);
-//        settingsBtn.setBounds(162, 285, 225, 75);
-//        closeBtn.setBounds(162, 370, 225, 75);
-//        getContentPane().setLayout(null);
-//        getContentPane().add(startBtn);
-//        getContentPane().add(settingsBtn);
-//        getContentPane().add(closeBtn);
+        JButton applyBtn = new JButton("Apply changes");
+        JButton backBtn = new JButton("Back to Menu");
+        applyBtn.setBounds(162, 200, 225, 75);
+        backBtn.setBounds(162, 285, 225, 75);
+        getContentPane().setLayout(null);
+        getContentPane().add(applyBtn);
+        getContentPane().add(backBtn);
 
-//        startBtn.addActionListener(e -> new Tetris());
-//        settingsBtn.addActionListener(panel);
-//        closeBtn.addActionListener(e -> System.exit(0));
+        applyBtn.addActionListener(e -> {
+            System.out.println("All working");
+            System.out.println("All working");
+        });
+        backBtn.addActionListener(e -> {
+            this.dispose();
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.setVisible(true);
+        });
 
         JLabel bottomText = new JLabel("Made by Ivanovichev Ivan");
         bottomText.setFont(new Font("Times New Romans", Font.PLAIN, 10));
@@ -37,6 +40,5 @@ public class Settings extends JFrame {
         setSize(550, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
     }
 }

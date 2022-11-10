@@ -23,8 +23,16 @@ public class MainMenu extends JFrame {
         getContentPane().add(settingsBtn);
         getContentPane().add(closeBtn);
 
-        startBtn.addActionListener(e -> new Tetris());
-        settingsBtn.addActionListener(e -> new Settings());
+        startBtn.addActionListener(e -> {
+            this.dispose();
+            Tetris tetris = new Tetris();
+            tetris.setVisible(true);
+        });
+        settingsBtn.addActionListener(e -> {
+            this.dispose();
+            Settings settings = new Settings();
+            settings.setVisible(true);
+        });
         closeBtn.addActionListener(e -> System.exit(0));
 
         JLabel bottomText = new JLabel("Made by Ivanovichev Ivan");

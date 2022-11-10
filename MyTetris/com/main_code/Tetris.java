@@ -1,7 +1,6 @@
 package com.main_code;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -24,7 +23,6 @@ public class Tetris extends JFrame {
         setSize(200, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setVisible(true);
     }
 
     JLabel getStatusBar() {
