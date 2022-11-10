@@ -20,20 +20,14 @@ public class Tetris extends JFrame {
         add(board);
         board.start();
 
-        setTitle("com.main_code.Tetris");
+        setTitle("T E T R I S");
         setSize(200, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     JLabel getStatusBar() {
         return statusbar;
-    }
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            var game = new Tetris();
-            game.setVisible(true);
-        });
     }
 }
