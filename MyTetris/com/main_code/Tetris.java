@@ -6,16 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class Tetris extends JFrame {
-
     private JLabel statusbar;
 
     public Tetris() {
-
         initUI();
     }
 
     private void initUI() {
-
         statusbar = new JLabel(" 0");
         add(statusbar, BorderLayout.SOUTH);
 
@@ -30,14 +27,11 @@ public class Tetris extends JFrame {
     }
 
     JLabel getStatusBar() {
-
         return statusbar;
     }
 
     public static void main(String[] args) {
-
         EventQueue.invokeLater(() -> {
-
             var game = new Tetris();
             game.setVisible(true);
         });
