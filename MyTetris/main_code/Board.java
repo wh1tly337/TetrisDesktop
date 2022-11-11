@@ -12,11 +12,11 @@ import java.awt.event.KeyEvent;
 public class Board extends JPanel {
     private final int BOARD_WIDTH = 10; //12
     private final int BOARD_HEIGHT = 20; //24
-
     private Timer timer;
     private boolean isFallingFinished = false;
     private boolean isPaused = false;
     private int numLinesRemoved = 0;
+    private int scoreCounter = 0;
     private int curX = 0;
     private int curY = 0;
     private JLabel statusbar;
@@ -26,7 +26,6 @@ public class Board extends JPanel {
     private Tetrominoe[] board;
 
     public Board(Tetris parent) {
-
         initBoard(parent);
     }
 
@@ -39,13 +38,10 @@ public class Board extends JPanel {
     }
 
     private int squareWidth() {
-//        return (int) getSize().getWidth() / BOARD_WIDTH;
         return 300 / BOARD_WIDTH;
-
     }
 
     private int squareHeight() {
-//        return (int) getSize().getHeight() / BOARD_HEIGHT;
         return 600 / BOARD_HEIGHT;
     }
 
@@ -60,8 +56,8 @@ public class Board extends JPanel {
         clearBoard();
         newPiece();
 
-        int PERIOD_INTERVAL = 300; //speed of game
-        timer = new Timer(PERIOD_INTERVAL, new GameCycle());
+        int gameSpeed = 300;
+        timer = new Timer(gameSpeed, new GameCycle());
         timer.start();
     }
 
@@ -71,9 +67,8 @@ public class Board extends JPanel {
         if (isPaused) {
             statusbar.setText("Game on pause");
         } else {
-//            statusbar.setText(String.valueOf(numLinesRemoved));
+            statusbar.setText("");
             line.setText(String.valueOf(numLinesRemoved));
-
         }
         repaint();
     }
@@ -156,7 +151,7 @@ public class Board extends JPanel {
             curPiece.setShape(Tetrominoe.NoShape);
             timer.stop();
 
-            var msg = String.format("Game over. Score: %d", numLinesRemoved);
+            var msg = String.format("Game over.\nScore: %d", numLinesRemoved);
             statusbar.setText(msg);
         }
     }
@@ -207,9 +202,21 @@ public class Board extends JPanel {
         }
 
         if (numFullLines > 0) {
-            numLinesRemoved += numFullLines;
+            if (numFullLines == 1) {
+                scoreCounter += 100;
+                score.setText(String.valueOf(scoreCounter));
+            } else if (numFullLines == 2) {
+                scoreCounter += 300;
+                score.setText(String.valueOf(scoreCounter));
+            } else if (numFullLines == 3) {
+                scoreCounter += 700;
+                score.setText(String.valueOf(scoreCounter));
+            } else if (numFullLines == 4) {
+                scoreCounter += 1500;
+                score.setText(String.valueOf(scoreCounter));
+            }
 
-//            statusbar.setText(String.valueOf(numLinesRemoved));
+            numLinesRemoved += numFullLines;
             line.setText(String.valueOf(numLinesRemoved));
             isFallingFinished = true;
             curPiece.setShape(Tetrominoe.NoShape);

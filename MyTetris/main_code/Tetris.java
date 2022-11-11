@@ -33,24 +33,36 @@ public class Tetris extends JFrame {
         add(line);
         line.setBounds(440, 170, 100, 100);
 
-        statusbar = new JLabel(" 0");
-        statusbar.setFont(new Font("Times New Romans", Font.PLAIN, 20));
-        add(statusbar);
-        statusbar.setBounds(370, 216, 100, 100);
+        statusbar = new JLabel(" ");
 
         getContentPane().setLayout(null);
 
-        var gameBoard = new Board(this);
+        Board gameBoard = new Board(this);
         add(gameBoard);
         gameBoard.start();
         gameBoard.setBounds(35, 36, 300, 600);
-        gameBoard.setBackground(Color.gray); // for game zone
+        gameBoard.setBackground(Color.gray);
+
+        JLabel sbBoard = statusbar;
+        sbBoard.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        gameBoard.add(sbBoard);
+        sbBoard.setBounds(0, 0, 100, 100);
 
         var nextShapeBoard = new Board(this);
         add(nextShapeBoard);
         nextShapeBoard.start();
         nextShapeBoard.setBounds(370, 36, 100, 100);
-        nextShapeBoard.setBackground(Color.gray); // for next shape
+        nextShapeBoard.setBackground(Color.gray);
+
+        JButton backToMenuBtn = new JButton("Back to Menu");
+        backToMenuBtn.setBounds(367, 600, 106, 40);
+        getContentPane().setLayout(null);
+        getContentPane().add(backToMenuBtn);
+        backToMenuBtn.addActionListener(e -> {
+            this.dispose();
+            MainMenu settings = new MainMenu();
+            settings.setVisible(true);
+        });
 
 //        board.setLayout(null);
 //        ImageIcon img = new ImageIcon("/Users/user/IdeaProjects/TetrisMacOS/MyTetris/tetrisBackground.jpg");
@@ -59,7 +71,7 @@ public class Tetris extends JFrame {
 //        board.add(background);
 
         setTitle("T E T R I S");
-        getContentPane().setBackground(Color.darkGray); //all window background
+        getContentPane().setBackground(Color.darkGray);
         setSize(505, 699);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
