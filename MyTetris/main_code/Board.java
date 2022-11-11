@@ -20,6 +20,8 @@ public class Board extends JPanel {
     private int curX = 0;
     private int curY = 0;
     private JLabel statusbar;
+    private JLabel score;
+    private JLabel line;
     private Shape curPiece;
     private Tetrominoe[] board;
 
@@ -31,6 +33,8 @@ public class Board extends JPanel {
     private void initBoard(Tetris parent) {
         setFocusable(true);
         statusbar = parent.getStatusBar();
+        score = parent.getScore();
+        line = parent.getLine();
         addKeyListener(new TAdapter());
     }
 
@@ -65,9 +69,11 @@ public class Board extends JPanel {
         isPaused = !isPaused;
 
         if (isPaused) {
-            statusbar.setText("paused");
+            statusbar.setText("Game on pause");
         } else {
-            statusbar.setText(String.valueOf(numLinesRemoved));
+//            statusbar.setText(String.valueOf(numLinesRemoved));
+            line.setText(String.valueOf(numLinesRemoved));
+
         }
         repaint();
     }
@@ -203,7 +209,8 @@ public class Board extends JPanel {
         if (numFullLines > 0) {
             numLinesRemoved += numFullLines;
 
-            statusbar.setText(String.valueOf(numLinesRemoved));
+//            statusbar.setText(String.valueOf(numLinesRemoved));
+            line.setText(String.valueOf(numLinesRemoved));
             isFallingFinished = true;
             curPiece.setShape(Tetrominoe.NoShape);
         }

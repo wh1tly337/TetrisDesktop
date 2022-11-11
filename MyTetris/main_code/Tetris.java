@@ -5,14 +5,39 @@ import javax.swing.*;
 
 public class Tetris extends JFrame {
     private JLabel statusbar;
+    private JLabel score;
+    private JLabel line;
 
     public Tetris() {
         initUI();
     }
 
     private void initUI() {
-//        statusbar = new JLabel(" 0");
-//        add(statusbar, BorderLayout.SOUTH); // old score
+        JLabel scoreText = new JLabel("Score:");
+        scoreText.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        getContentPane().add(scoreText);
+        scoreText.setBounds(370, 124, 100, 100);
+
+        JLabel lineText = new JLabel("Line:");
+        lineText.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        getContentPane().add(lineText);
+        lineText.setBounds(370, 170, 100, 100);
+
+        score = new JLabel(" 0");
+        score.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        add(score);
+        score.setBounds(440, 124, 100, 100);
+
+        line = new JLabel(" 0");
+        line.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        add(line);
+        line.setBounds(440, 170, 100, 100);
+
+        statusbar = new JLabel(" 0");
+        statusbar.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        add(statusbar);
+        statusbar.setBounds(370, 216, 100, 100);
+
         getContentPane().setLayout(null);
 
         var gameBoard = new Board(this);
@@ -36,11 +61,20 @@ public class Tetris extends JFrame {
         setTitle("T E T R I S");
         getContentPane().setBackground(Color.darkGray); //all window background
         setSize(505, 699);
+        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
 
     JLabel getStatusBar() {
         return statusbar;
+    }
+
+    JLabel getScore() {
+        return score;
+    }
+
+    JLabel getLine() {
+        return line;
     }
 }

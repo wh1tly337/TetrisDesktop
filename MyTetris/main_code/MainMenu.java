@@ -44,7 +44,7 @@ public class MainMenu extends JFrame {
         setResizable(false);
         setSize(550, 500);
         setLocationRelativeTo(null);
-//        setFocusable(true);
+        getContentPane().setBackground(Color.darkGray); //all window background
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
