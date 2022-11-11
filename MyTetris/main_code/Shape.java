@@ -4,20 +4,20 @@ import java.util.Random;
 
 public class Shape {
 
-    protected enum Tetrominoe {
+    protected enum ShapeList {
         NoShape, ZShape, SShape, LineShape,
         TShape, SquareShape, LShape, MirroredLShape
     }
 
-    private Tetrominoe pieceShape;
+    private ShapeList pieceShape;
     private final int[][] coords;
 
     public Shape() {
         coords = new int[4][2];
-        setShape(Tetrominoe.NoShape);
+        setShape(ShapeList.NoShape);
     }
 
-    void setShape(Tetrominoe shape) {
+    void setShape(ShapeList shape) {
         int[][][] coordsTable = new int[][][]{
                 {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
                 {{0, -1}, {0, 0}, {-1, 0}, {-1, 1}},
@@ -52,7 +52,7 @@ public class Shape {
         return coords[index][1];
     }
 
-    Tetrominoe getShape() {
+    ShapeList getShape() {
         return pieceShape;
     }
 
@@ -61,17 +61,17 @@ public class Shape {
         var r = new Random();
         int x = Math.abs(r.nextInt()) % 7 + 1;
 
-        Tetrominoe[] values = Tetrominoe.values();
+        ShapeList[] values = ShapeList.values();
         setShape(values[x]);
     }
 
-//    public int minX() {
-//        int m = coords[0][0];
-//        for (int i = 0; i < 4; i++) {
-//            m = Math.min(m, coords[i][0]);
-//        }
-//        return m;
-//    }
+    public int minX() {
+        int m = coords[0][0];
+        for (int i = 0; i < 4; i++) {
+            m = Math.min(m, coords[i][0]);
+        }
+        return m;
+    }
 
 
     int minY() {
@@ -82,24 +82,24 @@ public class Shape {
         return m;
     }
 
-//    Shape rotateLeft() {
-//        if (pieceShape == Tetrominoe.SquareShape) {
-//            return this;
-//        }
-//
-//        var result = new Shape();
-//        result.pieceShape = pieceShape;
-//
-//        for (int i = 0; i < 4; i++) {
-//            result.setX(i, y(i));
-//            result.setY(i, -x(i));
-//        }
-//        return result;
-//    }
+    Shape rotateLeft() {
+        if (pieceShape == ShapeList.SquareShape) {
+            return this;
+        }
+
+        var result = new Shape();
+        result.pieceShape = pieceShape;
+
+        for (int i = 0; i < 4; i++) {
+            result.setX(i, y(i));
+            result.setY(i, -x(i));
+        }
+        return result;
+    }
 
     Shape rotateRight() {
 
-        if (pieceShape == Tetrominoe.SquareShape) {
+        if (pieceShape == ShapeList.SquareShape) {
             return this;
         }
 

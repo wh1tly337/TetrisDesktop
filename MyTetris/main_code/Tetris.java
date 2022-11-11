@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Tetris extends JFrame {
-    private JLabel statusbar;
+    private JLabel gameStatus;
     private JLabel score;
     private JLabel line;
 
@@ -33,7 +33,7 @@ public class Tetris extends JFrame {
         add(line);
         line.setBounds(440, 170, 100, 100);
 
-        statusbar = new JLabel(" ");
+        gameStatus = new JLabel(" ");
 
         getContentPane().setLayout(null);
 
@@ -43,7 +43,7 @@ public class Tetris extends JFrame {
         gameBoard.setBounds(35, 36, 300, 600);
         gameBoard.setBackground(Color.gray);
 
-        JLabel sbBoard = statusbar;
+        JLabel sbBoard = gameStatus;
         sbBoard.setFont(new Font("Times New Romans", Font.PLAIN, 20));
         gameBoard.add(sbBoard);
         sbBoard.setBounds(0, 0, 100, 100);
@@ -56,12 +56,21 @@ public class Tetris extends JFrame {
 
         JButton backToMenuBtn = new JButton("Back to Menu");
         backToMenuBtn.setBounds(367, 600, 106, 40);
+        JButton restartBtn = new JButton("Restart");
+        restartBtn.setBounds(367, 532, 106, 40);
         getContentPane().setLayout(null);
         getContentPane().add(backToMenuBtn);
+        getContentPane().add(restartBtn);
+
         backToMenuBtn.addActionListener(e -> {
             this.dispose();
             MainMenu settings = new MainMenu();
             settings.setVisible(true);
+        });
+        restartBtn.addActionListener(e -> {
+            this.dispose();
+            Tetris tetris = new Tetris();
+            tetris.setVisible(true);
         });
 
 //        board.setLayout(null);
@@ -79,7 +88,7 @@ public class Tetris extends JFrame {
     }
 
     JLabel getStatusBar() {
-        return statusbar;
+        return gameStatus;
     }
 
     JLabel getScore() {
