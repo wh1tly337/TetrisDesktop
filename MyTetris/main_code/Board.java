@@ -1,6 +1,6 @@
-package com.main_code;
+package main_code;
 
-import com.main_code.Shape.Tetrominoe;
+import main_code.Shape.Tetrominoe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,8 +10,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Board extends JPanel {
-    private final int BOARD_WIDTH = 10;
-    private final int BOARD_HEIGHT = 22;
+    private final int BOARD_WIDTH = 10; //12
+    private final int BOARD_HEIGHT = 20; //24
 
     private Timer timer;
     private boolean isFallingFinished = false;
@@ -35,11 +35,14 @@ public class Board extends JPanel {
     }
 
     private int squareWidth() {
-        return (int) getSize().getWidth() / BOARD_WIDTH;
+//        return (int) getSize().getWidth() / BOARD_WIDTH;
+        return 300 / BOARD_WIDTH;
+
     }
 
     private int squareHeight() {
-        return (int) getSize().getHeight() / BOARD_HEIGHT;
+//        return (int) getSize().getHeight() / BOARD_HEIGHT;
+        return 600 / BOARD_HEIGHT;
     }
 
     private Tetrominoe shapeAt(int x, int y) {
@@ -53,7 +56,7 @@ public class Board extends JPanel {
         clearBoard();
         newPiece();
 
-        int PERIOD_INTERVAL = 300;
+        int PERIOD_INTERVAL = 300; //speed of game
         timer = new Timer(PERIOD_INTERVAL, new GameCycle());
         timer.start();
     }
@@ -268,15 +271,13 @@ public class Board extends JPanel {
 
             int keycode = e.getKeyCode();
 
-            // Java 12 switch expressions
             switch (keycode) {
-                case KeyEvent.VK_P -> pause();
+                case KeyEvent.VK_ESCAPE -> pause();
                 case KeyEvent.VK_LEFT, KeyEvent.VK_A -> tryMove(curPiece, curX - 1, curY);
                 case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> tryMove(curPiece, curX + 1, curY);
                 case KeyEvent.VK_DOWN, KeyEvent.VK_S -> oneLineDown();
                 case KeyEvent.VK_UP, KeyEvent.VK_W -> dropDown();
                 case KeyEvent.VK_SPACE -> tryMove(curPiece.rotateRight(), curX, curY);
-//                case KeyEvent.VK_D -> oneLineDown();
             }
         }
     }

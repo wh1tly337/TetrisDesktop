@@ -1,4 +1,4 @@
-package com.main_code;
+package main_code;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,6 +44,7 @@ public class MainMenu extends JFrame {
         setResizable(false);
         setSize(550, 500);
         setLocationRelativeTo(null);
+//        setFocusable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
