@@ -48,7 +48,7 @@ public class Tetris extends JFrame {
         gameBoard.add(sbBoard);
         sbBoard.setBounds(0, 0, 100, 100);
 
-        var nextShapeBoard = new Board(this);
+        var nextShapeBoard = new PreviewBoard();
         add(nextShapeBoard);
         nextShapeBoard.start();
         nextShapeBoard.setBounds(370, 36, 100, 100);
@@ -72,12 +72,6 @@ public class Tetris extends JFrame {
             Tetris tetris = new Tetris();
             tetris.setVisible(true);
         });
-
-//        board.setLayout(null);
-//        ImageIcon img = new ImageIcon("/Users/user/IdeaProjects/TetrisMacOS/MyTetris/tetrisBackground.jpg");
-//        JLabel background = new JLabel("", img, JLabel.CENTER);
-//        background.setBounds(0, 0, 300, 600);
-//        board.add(background);
 
         setTitle("T E T R I S");
         getContentPane().setBackground(Color.darkGray);

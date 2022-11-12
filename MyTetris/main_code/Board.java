@@ -10,8 +10,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Board extends JPanel {
-    private final int BOARD_WIDTH = 10; //12
-    private final int BOARD_HEIGHT = 20; //24
+    private final int BOARD_WIDTH = 10; //10
+    private final int BOARD_HEIGHT = 20; //22
     private Timer timer;
     private boolean isFallingFinished = false;
     private boolean isPaused = false;
@@ -54,7 +54,10 @@ public class Board extends JPanel {
         board = new ShapeList[BOARD_WIDTH * BOARD_HEIGHT];
 
         clearBoard();
-        newPiece();
+//        newPiece();
+        curPiece.setRandomShape();
+        curX = BOARD_WIDTH / 2 - 1; // +1
+        curY = BOARD_HEIGHT - 1 + curPiece.minY();
 
         int gameSpeed = 300;
         timer = new Timer(gameSpeed, new GameCycle());
@@ -65,7 +68,7 @@ public class Board extends JPanel {
         isPaused = !isPaused;
 
         if (isPaused) {
-            gameStatus.setText("Game on pause");
+            gameStatus.setText("Game on Pause");
         } else {
             gameStatus.setText("");
             line.setText(String.valueOf(numLinesRemoved));
@@ -143,15 +146,19 @@ public class Board extends JPanel {
     }
 
     private void newPiece() {
-        curPiece.setRandomShape();
-        curX = BOARD_WIDTH / 2 + 1;
+        curPiece = PreviewBoard.curPiece_P;
+        curX = BOARD_WIDTH / 2 - 1; // +1
         curY = BOARD_HEIGHT - 1 + curPiece.minY();
+
+        PreviewBoard pb = new PreviewBoard();
+        pb.clearBoard_P();
+        pb.newPiece_P();
 
         if (!tryMove(curPiece, curX, curY)) {
             curPiece.setShape(ShapeList.NoShape);
             timer.stop();
 
-            var msg = String.format("Game over.\nScore: %d", scoreCounter);
+            String msg = String.format("Game over.\nScore: %d", scoreCounter);
             gameStatus.setText(msg);
         }
     }
