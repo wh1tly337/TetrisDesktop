@@ -54,10 +54,7 @@ public class Board extends JPanel {
         board = new ShapeList[BOARD_WIDTH * BOARD_HEIGHT];
 
         clearBoard();
-//        newPiece();
-        curPiece.setRandomShape();
-        curX = BOARD_WIDTH / 2 - 1; // +1
-        curY = BOARD_HEIGHT - 1 + curPiece.minY();
+        newPiece();
 
         int gameSpeed = 300;
         timer = new Timer(gameSpeed, new GameCycle());
@@ -146,13 +143,9 @@ public class Board extends JPanel {
     }
 
     private void newPiece() {
-        curPiece = PreviewBoard.curPiece_P;
+        curPiece.setRandomShape();
         curX = BOARD_WIDTH / 2 - 1; // +1
         curY = BOARD_HEIGHT - 1 + curPiece.minY();
-
-        PreviewBoard pb = new PreviewBoard();
-        pb.clearBoard_P();
-        pb.newPiece_P();
 
         if (!tryMove(curPiece, curX, curY)) {
             curPiece.setShape(ShapeList.NoShape);

@@ -4,14 +4,17 @@ import main_code.Shape.ShapeList;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PreviewBoard extends JPanel {
-    private final int BOARD_WIDTH_P = 5; //10
-    private final int BOARD_HEIGHT_P = 5; //22
-    private static int curX_P = 0;
-    private static int curY_P = 0;
-    public static Shape curPiece_P;
-    private ShapeList[] board_P;
+    private final int BOARD_WIDTH = 5; //10
+    private final int BOARD_HEIGHT = 5; //22
+    public boolean isFallingFinished = false;
+    private int curX = 0;
+    private int curY = 0;
+    public Shape curPiece;
+    private ShapeList[] board;
 
     public PreviewBoard() {
         initBoard();
@@ -22,23 +25,31 @@ public class PreviewBoard extends JPanel {
     }
 
     private int squareWidth() {
-        return 100 / BOARD_WIDTH_P;
+        return 100 / BOARD_WIDTH;
     }
 
     private int squareHeight() {
-        return 100 / BOARD_HEIGHT_P;
+        return 100 / BOARD_HEIGHT;
     }
 
     private ShapeList shapeAt(int x, int y) {
-        return board_P[(y * BOARD_WIDTH_P) + x];
+        return board[(y * BOARD_WIDTH) + x];
     }
 
     void start() {
-        curPiece_P = new Shape();
-        board_P = new ShapeList[BOARD_WIDTH_P * BOARD_HEIGHT_P];
+        curPiece = new Shape();
+        board = new ShapeList[BOARD_WIDTH * BOARD_HEIGHT];
 
-        clearBoard_P();
-        newPiece_P();
+        clearBoard();
+        newPiece();
+
+//        curPiece.setRandomShape();
+//        curX = BOARD_WIDTH / 2 - 1; // +1
+//        curY = BOARD_HEIGHT - 1 + curPiece.minY();
+
+        int gameSpeed = 300;
+        Timer timer = new Timer(gameSpeed, new GameCycle());
+        timer.start();
     }
 
     @Override
@@ -49,11 +60,11 @@ public class PreviewBoard extends JPanel {
 
     private void ShapeDrawing(Graphics g) {
         var size = getSize();
-        int boardTop = (int) size.getHeight() - BOARD_HEIGHT_P * squareHeight();
+        int boardTop = (int) size.getHeight() - BOARD_HEIGHT * squareHeight();
 
-        for (int i = 0; i < BOARD_HEIGHT_P; i++) {
-            for (int j = 0; j < BOARD_WIDTH_P; j++) {
-                ShapeList shape = shapeAt(j, BOARD_HEIGHT_P - i - 1);
+        for (int i = 0; i < BOARD_HEIGHT; i++) {
+            for (int j = 0; j < BOARD_WIDTH; j++) {
+                ShapeList shape = shapeAt(j, BOARD_HEIGHT - i - 1);
 
                 if (shape != ShapeList.NoShape) {
                     drawSquare(g, j * squareWidth(), boardTop + i * squareHeight(), shape);
@@ -61,28 +72,85 @@ public class PreviewBoard extends JPanel {
             }
         }
 
-        if (curPiece_P.getShape() != ShapeList.NoShape) {
+        if (curPiece.getShape() != ShapeList.NoShape) {
             for (int i = 0; i < 4; i++) {
 
-                int x = curX_P + curPiece_P.x(i);
-                int y = curY_P - curPiece_P.y(i);
+                int x = curX + curPiece.x(i);
+                int y = curY - curPiece.y(i);
 
-                drawSquare(g, x * squareWidth(), boardTop + (BOARD_HEIGHT_P - y - 1) * squareHeight(), curPiece_P.getShape());
+                drawSquare(g, x * squareWidth(), boardTop + (BOARD_HEIGHT - y - 1) * squareHeight(), curPiece.getShape());
             }
         }
     }
 
-    public void clearBoard_P() {
-        for (int i = 0; i < BOARD_HEIGHT_P * BOARD_WIDTH_P; i++) {
-            board_P[i] = ShapeList.NoShape;
+    public void oneLineDown() {
+        if (!tryMove(curPiece, curX, curY - 1)) {
+            pieceDropped();
         }
     }
 
-    public void newPiece_P() {
-        curPiece_P.setRandomShape();
-        curX_P = BOARD_WIDTH_P / 2; // +1
-        curY_P = BOARD_HEIGHT_P - 2 + curPiece_P.minY();
+    private void clearBoard() {
+        for (int i = 0; i < BOARD_HEIGHT * BOARD_WIDTH; i++) {
+            board[i] = ShapeList.NoShape;
+        }
     }
+
+    private void pieceDropped() {
+        for (int i = 0; i < 4; i++) {
+            int x = curX + curPiece.x(i);
+            int y = curY - curPiece.y(i);
+            board[(y * BOARD_WIDTH) + x] = curPiece.getShape();
+        }
+
+        removeFullLines();
+
+        if (!isFallingFinished) {
+            newPiece();
+        }
+    }
+
+    public void newPiece() {
+        curPiece.setRandomShape();
+        curX = BOARD_WIDTH / 2; // +1
+        curY = BOARD_HEIGHT - 1 + curPiece.minY(); // -1
+    }
+
+    private boolean tryMove(Shape newPiece, int newX, int newY) {
+        for (int i = 0; i < 4; i++) {
+            int x = newX + newPiece.x(i);
+            int y = newY - newPiece.y(i);
+
+            if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT) {
+                return false;
+            }
+
+            if (shapeAt(x, y) != ShapeList.NoShape) {
+                return false;
+            }
+        }
+
+        curPiece = newPiece;
+        curX = newX;
+        curY = newY;
+
+        repaint();
+
+        return true;
+    }
+
+    private void removeFullLines() {
+        for (int i = BOARD_HEIGHT - 1; i >= 0; i--) {
+            for (int k = i; k < BOARD_HEIGHT - 1; k++) {
+                for (int j = 0; j < BOARD_WIDTH; j++) {
+                    board[(k * BOARD_WIDTH) + j] = shapeAt(j, k + 1);
+                }
+            }
+        }
+
+        isFallingFinished = true;
+        curPiece.setShape(ShapeList.NoShape);
+    }
+
 
     private void drawSquare(Graphics g, int x, int y, ShapeList shape) {
         Color[] colors = {
@@ -110,5 +178,29 @@ public class PreviewBoard extends JPanel {
                 x + squareWidth() - 1, y + squareHeight() - 1);
         g.drawLine(x + squareWidth() - 1, y + squareHeight() - 1,
                 x + squareWidth() - 1, y + 1);
+    }
+
+    private class GameCycle implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            doGameCycle();
+        }
+
+    }
+
+    private void doGameCycle() {
+        updateGameStatus();
+        repaint();
+    }
+
+    private void updateGameStatus() {
+        if (isFallingFinished) {
+            isFallingFinished = false;
+//            System.out.println("hereherehere");
+            newPiece();
+        } else {
+            oneLineDown();
+//            System.out.println("Not now");
+        }
     }
 }
