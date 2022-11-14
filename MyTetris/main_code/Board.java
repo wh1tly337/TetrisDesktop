@@ -28,7 +28,6 @@ public class Board extends JPanel {
     public Board(Tetris parent) {
         initBoard(parent);
     }
-
     private void initBoard(Tetris parent) {
         setFocusable(true);
         gameStatus = parent.getStatusBar();
@@ -271,6 +270,11 @@ public class Board extends JPanel {
         if (isFallingFinished) {
             isFallingFinished = false;
             newPiece();
+
+//            PreviewBoard pb = new PreviewBoard();
+//            pb.isFallingFinished_P = true;
+//            pb.newPiece();
+            // make error
         } else {
             oneLineDown();
         }

@@ -11,6 +11,9 @@ public class Tetris extends JFrame {
     public Tetris() {
         initUI();
     }
+//    public Tetris getParentTetris(){
+//        return this;
+//    }
 
     private void initUI() {
         JLabel scoreText = new JLabel("Score:");
@@ -22,6 +25,11 @@ public class Tetris extends JFrame {
         lineText.setFont(new Font("Times New Romans", Font.PLAIN, 20));
         getContentPane().add(lineText);
         lineText.setBounds(370, 170, 100, 100);
+
+        JLabel holdText = new JLabel("Holded Shape:");
+        holdText.setFont(new Font("Times New Romans", Font.PLAIN, 14));
+        getContentPane().add(holdText);
+        holdText.setBounds(370, 215, 100, 100);
 
         score = new JLabel(" 0");
         score.setFont(new Font("Times New Romans", Font.PLAIN, 20));
@@ -54,13 +62,22 @@ public class Tetris extends JFrame {
         nextShapeBoard.setBounds(370, 36, 100, 100);
         nextShapeBoard.setBackground(Color.gray);
 
-        JButton backToMenuBtn = new JButton("Back to Menu");
-        backToMenuBtn.setBounds(367, 600, 106, 40);
+        var holdShapeBoard = new HoldBoard();
+        add(holdShapeBoard);
+        holdShapeBoard.start();
+        holdShapeBoard.setBounds(370, 278, 100, 100);
+        holdShapeBoard.setBackground(Color.gray);
+
+        JButton holdBtn = new JButton("Hold Shape");
+        holdBtn.setBounds(367, 382, 106, 40);
         JButton restartBtn = new JButton("Restart");
         restartBtn.setBounds(367, 532, 106, 40);
+        JButton backToMenuBtn = new JButton("Back to Menu");
+        backToMenuBtn.setBounds(367, 600, 106, 40);
         getContentPane().setLayout(null);
-        getContentPane().add(backToMenuBtn);
+        getContentPane().add(holdBtn);
         getContentPane().add(restartBtn);
+        getContentPane().add(backToMenuBtn);
 
         backToMenuBtn.addActionListener(e -> {
             this.dispose();
