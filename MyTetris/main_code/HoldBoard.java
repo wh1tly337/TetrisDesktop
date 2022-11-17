@@ -83,11 +83,11 @@ public class HoldBoard extends JPanel {
         }
     }
 
-    public void oneLineDown() {
+//    public void oneLineDown() {
 //        if (!tryMove(curPiece, curX, curY - 1)) {
-            pieceDropped();
+//            pieceDropped();
 //        }
-    }
+//    }
 
     private void clearBoard() {
         for (int i = 0; i < BOARD_HEIGHT * BOARD_WIDTH; i++) {
@@ -95,19 +95,19 @@ public class HoldBoard extends JPanel {
         }
     }
 
-    private void pieceDropped() {
-        for (int i = 0; i < 4; i++) {
-            int x = curX + curPiece.x(i);
-            int y = curY - curPiece.y(i);
-            board[(y * BOARD_WIDTH) + x] = curPiece.getShape();
-        }
-
-        removeFullLines();
-
-        if (!isFallingFinished) {
-            newPiece();
-        }
-    }
+//    private void pieceDropped() {
+//        for (int i = 0; i < 4; i++) {
+//            int x = curX + curPiece.x(i);
+//            int y = curY - curPiece.y(i);
+//            board[(y * BOARD_WIDTH) + x] = curPiece.getShape();
+//        }
+//
+//        removeFullLines();
+//
+//        if (!isFallingFinished) {
+//            newPiece();
+//        }
+//    }
 
     public void newPiece() {
         curPiece.setRandomShape();
@@ -193,34 +193,7 @@ public class HoldBoard extends JPanel {
         repaint();
     }
 
-    public void getFallingStatus() {
-//        isFallingFinished = true;
-//        oneLineDown();
-//        isFallingFinished = false;
-//        newPiece();
-        isFallingFinished = false;
-        pieceDropped();
-        System.out.println("letsgo");
-    }
-
-
     private void updateGameStatus() {
-//        isFallingFinished = false;
-//        pieceDropped();
-//        System.out.println("lolo");
-//        removeFullLines();
-
-
-//        Tetris tt = new Tetris();
-//        Board boo = new Board(tt.getParentTetris());
-//        if (boo.statusSender()) {
-//            System.out.println("letsgo");
-//            newPiece();
-//        } else {
-//            oneLineDown();
-//        }
-
-
         if (isFallingFinished) {
             isFallingFinished = false;
             newPiece();

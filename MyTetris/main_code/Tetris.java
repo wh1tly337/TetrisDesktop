@@ -50,7 +50,7 @@ public class Tetris extends JFrame {
 
         PreviewBoard nextShapeBoard = new PreviewBoard();
         add(nextShapeBoard);
-        nextShapeBoard.start();
+        nextShapeBoard.start(); // i can transfer "this" here
         nextShapeBoard.setBounds(370, 36, 100, 100);
         nextShapeBoard.setBackground(Color.gray);
 
@@ -106,4 +106,8 @@ public class Tetris extends JFrame {
     JLabel getLine() {
         return line;
     }
+
+//    Tetris getThis(){ // for call Board(parent)
+//        return this;
+//    }
 }

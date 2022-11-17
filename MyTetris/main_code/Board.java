@@ -270,11 +270,6 @@ public class Board extends JPanel {
         if (isFallingFinished) {
             isFallingFinished = false;
             newPiece();
-
-//            PreviewBoard pb = new PreviewBoard();
-//            pb.isFallingFinished_P = true;
-//            pb.newPiece();
-            // make error
         } else {
             oneLineDown();
         }
