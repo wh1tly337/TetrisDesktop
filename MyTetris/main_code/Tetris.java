@@ -11,9 +11,6 @@ public class Tetris extends JFrame {
     public Tetris() {
         initUI();
     }
-//    public Tetris getParentTetris(){
-//        return this;
-//    }
 
     private void initUI() {
         JLabel scoreText = new JLabel("Score:");
@@ -51,22 +48,22 @@ public class Tetris extends JFrame {
         gameBoard.setBounds(35, 36, 300, 600);
         gameBoard.setBackground(Color.gray);
 
-        JLabel sbBoard = gameStatus;
-        sbBoard.setFont(new Font("Times New Romans", Font.PLAIN, 20));
-        gameBoard.add(sbBoard);
-        sbBoard.setBounds(0, 0, 100, 100);
-
-        var nextShapeBoard = new PreviewBoard();
+        PreviewBoard nextShapeBoard = new PreviewBoard();
         add(nextShapeBoard);
         nextShapeBoard.start();
         nextShapeBoard.setBounds(370, 36, 100, 100);
         nextShapeBoard.setBackground(Color.gray);
 
-        var holdShapeBoard = new HoldBoard();
+        HoldBoard holdShapeBoard = new HoldBoard();
         add(holdShapeBoard);
         holdShapeBoard.start();
         holdShapeBoard.setBounds(370, 278, 100, 100);
         holdShapeBoard.setBackground(Color.gray);
+
+        JLabel gameStatusBoard = gameStatus;
+        gameStatusBoard.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        gameBoard.add(gameStatusBoard);
+        gameStatusBoard.setBounds(0, 0, 100, 100);
 
         JButton holdBtn = new JButton("Hold Shape");
         holdBtn.setBounds(367, 382, 106, 40);
