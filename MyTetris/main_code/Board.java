@@ -27,7 +27,7 @@ public class Board extends JPanel {
     private JLabel isGameOver, isGameOnPause;
     private JLabel score, finalScore;
     private JLabel line;
-    private Shape curPiece, nextPiece, holdedPiece;
+    private Shape curPiece, nextPiece, holdedPiece, memory;
     private ShapeList[] board;
 
     public Board(Tetris parent) {
@@ -58,19 +58,23 @@ public class Board extends JPanel {
 
     void start() {
         nextPiece = new Shape();
+
         curPiece = new Shape();
-        holdedPiece = new Shape();
-        holdedPiece.setShape(ShapeList.NoShape);
-        holdedX = BOARD_WIDTH / 2 - 1; // +1
-        holdedY = BOARD_HEIGHT - 1;
-        board = new ShapeList[BOARD_WIDTH * BOARD_HEIGHT];
-
-        clearBoard();
-
         curPiece.setRandomShape();
         curX = BOARD_WIDTH / 2 - 1; // +1
         curY = BOARD_HEIGHT - 1 + curPiece.minY();
 
+        holdedPiece = new Shape();
+        holdedPiece.setShape(ShapeList.NoShape);
+        holdedX = BOARD_WIDTH / 2 - 1;
+        holdedY = BOARD_HEIGHT - 1;
+
+        memory = new Shape();
+        memory.setShape(ShapeList.NoShape);
+
+        board = new ShapeList[BOARD_WIDTH * BOARD_HEIGHT];
+
+        clearBoard();
         nextPiece();
 
         int gameSpeed = 300;
@@ -123,7 +127,7 @@ public class Board extends JPanel {
                 holdedPiece = curPiece;
                 newPiece();
             } else {
-                Shape memory = holdedPiece;
+                memory = holdedPiece;
                 holdedPiece = curPiece;
                 curPiece = memory;
                 curX = BOARD_WIDTH / 2 - 1; // +1
