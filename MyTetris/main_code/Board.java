@@ -19,15 +19,18 @@ public class Board extends JPanel {
     private int scoreCounter = 0;
     private int curX = 0;
     private int curY = 0;
+    private int nextX = 0;
+    private int nextY = 0;
     private JLabel gameStatus;
     private JLabel score;
     private JLabel line;
-    private Shape curPiece;
+    private Shape curPiece, nextPiece;
     private ShapeList[] board;
 
     public Board(Tetris parent) {
         initBoard(parent);
     }
+
     private void initBoard(Tetris parent) {
         setFocusable(true);
         gameStatus = parent.getStatusBar();
@@ -49,11 +52,17 @@ public class Board extends JPanel {
     }
 
     void start() {
+        nextPiece = new Shape();
         curPiece = new Shape();
         board = new ShapeList[BOARD_WIDTH * BOARD_HEIGHT];
 
         clearBoard();
-        newPiece();
+
+        curPiece.setRandomShape();
+        curX = BOARD_WIDTH / 2 - 1; // +1
+        curY = BOARD_HEIGHT - 1 + curPiece.minY();
+
+        nextPiece();
 
         int gameSpeed = 300;
         timer = new Timer(gameSpeed, new GameCycle());
@@ -66,7 +75,7 @@ public class Board extends JPanel {
         if (isPaused) {
             gameStatus.setText("Game on Pause");
         } else {
-            gameStatus.setText("");
+            gameStatus.setText(" ");
             line.setText(String.valueOf(numLinesRemoved));
         }
         repaint();
@@ -85,9 +94,11 @@ public class Board extends JPanel {
         for (int i = 0; i < BOARD_HEIGHT; i++) {
             for (int j = 0; j < BOARD_WIDTH; j++) {
                 ShapeList shape = shapeAt(j, BOARD_HEIGHT - i - 1);
+//                ShapeList nextShape = shapeAt(j, BOARD_HEIGHT - i - 1);
 
                 if (shape != ShapeList.NoShape) {
                     drawSquare(g, j * squareWidth(), boardTop + i * squareHeight(), shape);
+//                    drawSquare(g, 0, 0, nextShape);
                 }
             }
         }
@@ -98,7 +109,12 @@ public class Board extends JPanel {
                 int x = curX + curPiece.x(i);
                 int y = curY - curPiece.y(i);
 
+                int nX = nextX + nextPiece.x(i);
+                int nY = nextY - nextPiece.y(i);
+
                 drawSquare(g, x * squareWidth(), boardTop + (BOARD_HEIGHT - y - 1) * squareHeight(), curPiece.getShape());
+                drawSquare(g, nX * squareWidth() + 230, boardTop + (BOARD_HEIGHT - nY - 1) * squareHeight() + 40, nextPiece.getShape());
+
             }
         }
     }
@@ -142,7 +158,7 @@ public class Board extends JPanel {
     }
 
     private void newPiece() {
-        curPiece.setRandomShape();
+        curPiece = nextPiece;
         curX = BOARD_WIDTH / 2 - 1; // +1
         curY = BOARD_HEIGHT - 1 + curPiece.minY();
 
@@ -153,6 +169,14 @@ public class Board extends JPanel {
             String msg = String.format("Game over.\nScore: %d", scoreCounter);
             gameStatus.setText(msg);
         }
+
+        nextPiece();
+    }
+
+    private void nextPiece() {
+        nextPiece.setRandomShape();
+        nextX = BOARD_WIDTH / 2 - 1; // +1
+        nextY = BOARD_HEIGHT - 1 + curPiece.minY();
     }
 
     private boolean tryMove(Shape newPiece, int newX, int newY) {
