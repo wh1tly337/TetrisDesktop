@@ -22,8 +22,7 @@ public class Board extends JPanel {
     private int nextX = 0;
     private int nextY = 0;
     private JLabel isGameOver, isGameOnPause;
-    private JLabel finalScore;
-    private JLabel score;
+    private JLabel score, finalScore;
     private JLabel line;
     private Shape curPiece, nextPiece;
     private ShapeList[] board;

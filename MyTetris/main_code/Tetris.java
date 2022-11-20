@@ -5,8 +5,7 @@ import javax.swing.*;
 
 public class Tetris extends JFrame {
     private JLabel isGameOver, isGameOnPause;
-    private JLabel score;
-    private JLabel finalScore;
+    private JLabel score, finalScore;
     private JLabel line;
 
     public Tetris() {
