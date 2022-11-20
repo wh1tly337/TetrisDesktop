@@ -15,16 +15,19 @@ public class Board extends JPanel {
     private Timer timer;
     private boolean isFallingFinished = false;
     private boolean isPaused = false;
+    private boolean wasChanged = false;
     private int numLinesRemoved = 0;
     private int scoreCounter = 0;
     private int curX = 0;
     private int curY = 0;
     private int nextX = 0;
     private int nextY = 0;
+    private int holdedX = 0;
+    private int holdedY = 0;
     private JLabel isGameOver, isGameOnPause;
     private JLabel score, finalScore;
     private JLabel line;
-    private Shape curPiece, nextPiece;
+    private Shape curPiece, nextPiece, holdedPiece;
     private ShapeList[] board;
 
     public Board(Tetris parent) {
@@ -56,6 +59,10 @@ public class Board extends JPanel {
     void start() {
         nextPiece = new Shape();
         curPiece = new Shape();
+        holdedPiece = new Shape();
+        holdedPiece.setShape(ShapeList.NoShape);
+        holdedX = BOARD_WIDTH / 2 - 1; // +1
+        holdedY = BOARD_HEIGHT - 1;
         board = new ShapeList[BOARD_WIDTH * BOARD_HEIGHT];
 
         clearBoard();
@@ -107,7 +114,23 @@ public class Board extends JPanel {
     private void nextPiece() {
         nextPiece.setRandomShape();
         nextX = BOARD_WIDTH / 2 - 1; // +1
-        nextY = BOARD_HEIGHT - 1 + curPiece.minY();
+        nextY = BOARD_HEIGHT - 1;
+    }
+
+    private void holdPiece() {
+        if (!wasChanged) {
+            if (holdedPiece.getShape() == ShapeList.NoShape) {
+                holdedPiece = curPiece;
+                newPiece();
+            } else {
+                Shape memory = holdedPiece;
+                holdedPiece = curPiece;
+                curPiece = memory;
+                curX = BOARD_WIDTH / 2 - 1; // +1
+                curY = BOARD_HEIGHT - 1 + curPiece.minY();
+            }
+            wasChanged = true;
+        }
     }
 
     private void dropDown() {
@@ -146,6 +169,7 @@ public class Board extends JPanel {
         }
 
         removeFullLines();
+        wasChanged = false;
 
         if (!isFallingFinished) {
             newPiece();
@@ -245,12 +269,27 @@ public class Board extends JPanel {
                 int x = curX + curPiece.x(i);
                 int y = curY - curPiece.y(i);
 
-                int nX = nextX + nextPiece.x(i);
-                int nY = nextY - nextPiece.y(i);
-
                 drawSquare(g, x * squareWidth(), boardTop + (BOARD_HEIGHT - y - 1) * squareHeight(), curPiece.getShape());
-                drawSquare(g, nX * squareWidth() + 230, boardTop + (BOARD_HEIGHT - nY - 1) * squareHeight() + 40, nextPiece.getShape());
+            }
+        }
 
+        if (nextPiece.getShape() != ShapeList.NoShape) {
+            for (int i = 0; i < 4; i++) {
+
+                int x = nextX + nextPiece.x(i);
+                int y = nextY - nextPiece.y(i);
+
+                drawSquare(g, x * squareWidth() + 230, boardTop + (BOARD_HEIGHT - y - 1) * squareHeight() + 40, nextPiece.getShape());
+            }
+        }
+
+        if (holdedPiece.getShape() != ShapeList.NoShape) {
+            for (int i = 0; i < 4; i++) {
+
+                int x = holdedX + holdedPiece.x(i);
+                int y = holdedY - holdedPiece.y(i);
+
+                drawSquare(g, x * squareWidth() + 230, boardTop + (BOARD_HEIGHT - y - 1) * squareHeight() + 310, holdedPiece.getShape());
             }
         }
     }
@@ -324,6 +363,7 @@ public class Board extends JPanel {
                 case KeyEvent.VK_DOWN, KeyEvent.VK_S -> oneLineDown();
                 case KeyEvent.VK_UP, KeyEvent.VK_W -> dropDown();
                 case KeyEvent.VK_SPACE -> tryMove(curPiece.rotateRight(), curX, curY);
+                case KeyEvent.VK_ENTER -> holdPiece();
             }
         }
     }

@@ -52,11 +52,11 @@ public class Tetris extends JFrame {
 
         score.setFont(new Font("Times New Romans", Font.PLAIN, 20));
         gameBoard.add(score);
-        score.setBounds(390, 124, 100, 100);
+        score.setBounds(378, 124, 100, 100);
 
         line.setFont(new Font("Times New Romans", Font.PLAIN, 20));
         gameBoard.add(line);
-        line.setBounds(390, 170, 100, 100);
+        line.setBounds(366, 170, 100, 100);
 
         isGameOnPause.setFont(new Font("Times New Romans", Font.PLAIN, 20));
         gameBoard.add(isGameOnPause);
@@ -70,13 +70,10 @@ public class Tetris extends JFrame {
         gameBoard.add(finalScore);
         finalScore.setBounds(97, 30, 195, 100);
 
-        JButton holdBtn = new JButton("Hold Shape");
-        holdBtn.setBounds(317, 382, 106, 40);
         JButton restartBtn = new JButton("Restart");
         restartBtn.setBounds(317, 492, 106, 40);
         JButton backToMenuBtn = new JButton("Back to Menu");
         backToMenuBtn.setBounds(317, 560, 106, 40);
-        gameBoard.add(holdBtn);
         gameBoard.add(restartBtn);
         gameBoard.add(backToMenuBtn);
 
