@@ -25,7 +25,7 @@ public class Tetris extends JFrame {
         add(gameBoard);
         gameBoard.setLayout(null);
         gameBoard.start();
-        gameBoard.setBounds(35, 36, 435, 600);
+        gameBoard.setBounds(35, 35, 435, 601);
         gameBoard.setBackground(Color.GRAY);
 
         JSeparator separator = new JSeparator();

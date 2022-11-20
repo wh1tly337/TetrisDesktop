@@ -83,42 +83,31 @@ public class Board extends JPanel {
         repaint();
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        ShapeDrawing(g);
+    private void finishGame() {
+        curPiece.setShape(ShapeList.NoShape);
+        timer.stop();
+
+        isGameOver.setText("Game Over");
+        String msg = String.format("Score: %d", scoreCounter);
+        finalScore.setText(msg);
     }
 
-    private void ShapeDrawing(Graphics g) {
-        var size = getSize();
-        int boardTop = (int) size.getHeight() - BOARD_HEIGHT * squareHeight();
+    private void newPiece() {
+        curPiece = nextPiece;
+        curX = BOARD_WIDTH / 2 - 1; // +1
+        curY = BOARD_HEIGHT - 1 + curPiece.minY();
 
-        for (int i = 0; i < BOARD_HEIGHT; i++) {
-            for (int j = 0; j < BOARD_WIDTH; j++) {
-                ShapeList shape = shapeAt(j, BOARD_HEIGHT - i - 1);
-//                ShapeList nextShape = shapeAt(j, BOARD_HEIGHT - i - 1);
-
-                if (shape != ShapeList.NoShape) {
-                    drawSquare(g, j * squareWidth(), boardTop + i * squareHeight(), shape);
-//                    drawSquare(g, 0, 0, nextShape);
-                }
-            }
+        if (!tryMove(curPiece, curX, curY)) {
+            finishGame();
         }
 
-        if (curPiece.getShape() != ShapeList.NoShape) {
-            for (int i = 0; i < 4; i++) {
+        nextPiece();
+    }
 
-                int x = curX + curPiece.x(i);
-                int y = curY - curPiece.y(i);
-
-                int nX = nextX + nextPiece.x(i);
-                int nY = nextY - nextPiece.y(i);
-
-                drawSquare(g, x * squareWidth(), boardTop + (BOARD_HEIGHT - y - 1) * squareHeight(), curPiece.getShape());
-                drawSquare(g, nX * squareWidth() + 230, boardTop + (BOARD_HEIGHT - nY - 1) * squareHeight() + 40, nextPiece.getShape());
-
-            }
-        }
+    private void nextPiece() {
+        nextPiece.setRandomShape();
+        nextX = BOARD_WIDTH / 2 - 1; // +1
+        nextY = BOARD_HEIGHT - 1 + curPiece.minY();
     }
 
     private void dropDown() {
@@ -149,7 +138,11 @@ public class Board extends JPanel {
         for (int i = 0; i < 4; i++) {
             int x = curX + curPiece.x(i);
             int y = curY - curPiece.y(i);
-            board[(y * BOARD_WIDTH) + x] = curPiece.getShape();
+            try {
+                board[(y * BOARD_WIDTH) + x] = curPiece.getShape();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                finishGame();
+            }
         }
 
         removeFullLines();
@@ -157,29 +150,6 @@ public class Board extends JPanel {
         if (!isFallingFinished) {
             newPiece();
         }
-    }
-
-    private void newPiece() {
-        curPiece = nextPiece;
-        curX = BOARD_WIDTH / 2 - 1; // +1
-        curY = BOARD_HEIGHT - 1 + curPiece.minY();
-
-        if (!tryMove(curPiece, curX, curY)) {
-            curPiece.setShape(ShapeList.NoShape);
-            timer.stop();
-
-            isGameOver.setText("Game Over");
-            String msg = String.format("Score: %d", scoreCounter);
-            finalScore.setText(msg);
-        }
-
-        nextPiece();
-    }
-
-    private void nextPiece() {
-        nextPiece.setRandomShape();
-        nextX = BOARD_WIDTH / 2 - 1; // +1
-        nextY = BOARD_HEIGHT - 1 + curPiece.minY();
     }
 
     private boolean tryMove(Shape newPiece, int newX, int newY) {
@@ -246,6 +216,42 @@ public class Board extends JPanel {
             line.setText(String.valueOf(numLinesRemoved));
             isFallingFinished = true;
             curPiece.setShape(ShapeList.NoShape);
+        }
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        ShapeDrawing(g);
+    }
+
+    private void ShapeDrawing(Graphics g) {
+        var size = getSize();
+        int boardTop = (int) size.getHeight() - BOARD_HEIGHT * squareHeight();
+
+        for (int i = 0; i < BOARD_HEIGHT; i++) {
+            for (int j = 0; j < BOARD_WIDTH; j++) {
+                ShapeList shape = shapeAt(j, BOARD_HEIGHT - i - 1);
+
+                if (shape != ShapeList.NoShape) {
+                    drawSquare(g, j * squareWidth(), boardTop + i * squareHeight(), shape);
+                }
+            }
+        }
+
+        if (curPiece.getShape() != ShapeList.NoShape) {
+            for (int i = 0; i < 4; i++) {
+
+                int x = curX + curPiece.x(i);
+                int y = curY - curPiece.y(i);
+
+                int nX = nextX + nextPiece.x(i);
+                int nY = nextY - nextPiece.y(i);
+
+                drawSquare(g, x * squareWidth(), boardTop + (BOARD_HEIGHT - y - 1) * squareHeight(), curPiece.getShape());
+                drawSquare(g, nX * squareWidth() + 230, boardTop + (BOARD_HEIGHT - nY - 1) * squareHeight() + 40, nextPiece.getShape());
+
+            }
         }
     }
 
