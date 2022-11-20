@@ -17,14 +17,14 @@ public class Tetris extends JFrame {
 
         Board gameBoard = new Board(this);
         add(gameBoard);
+        gameBoard.setLayout(null);
         gameBoard.start();
-//        gameBoard.setBounds(35, 36, 300, 600);
         gameBoard.setBounds(35, 36, 435, 600);
-        gameBoard.setBackground(Color.gray);
+        gameBoard.setBackground(Color.GRAY);
 
         JSeparator separator = new JSeparator();
         separator.setOrientation(SwingConstants.VERTICAL);
-        separator.setBounds(295,-2,100,604);
+        separator.setBounds(295, -2, 100, 604);
         separator.setBackground(Color.DARK_GRAY);
         separator.setForeground(Color.DARK_GRAY);
         gameBoard.add(separator);
@@ -55,10 +55,9 @@ public class Tetris extends JFrame {
         line.setBounds(390, 170, 100, 100);
 
         gameStatus = new JLabel(" ");
-        JLabel gameStatusBoard = gameStatus;
-        gameStatusBoard.setFont(new Font("Times New Romans", Font.PLAIN, 20));
-        gameStatusBoard.setBounds(0, 0, 100, 100);
-        gameBoard.add(gameStatusBoard);
+        gameStatus.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        gameBoard.add(gameStatus);
+        gameStatus.setBounds(0, 0, 100, 100);
 
         JButton holdBtn = new JButton("Hold Shape");
         holdBtn.setBounds(317, 382, 106, 40);
@@ -81,9 +80,8 @@ public class Tetris extends JFrame {
             tetris.setVisible(true);
         });
 
-        gameBoard.setLayout(null);
         setTitle("T E T R I S");
-        getContentPane().setBackground(Color.darkGray);
+        getContentPane().setBackground(Color.DARK_GRAY);
         setSize(505, 699);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -101,8 +99,4 @@ public class Tetris extends JFrame {
     JLabel getLine() {
         return line;
     }
-
-//    Tetris getThis(){ // for call Board(parent)
-//        return this;
-//    }
 }
