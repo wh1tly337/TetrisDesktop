@@ -21,7 +21,8 @@ public class Board extends JPanel {
     private int curY = 0;
     private int nextX = 0;
     private int nextY = 0;
-    private JLabel gameStatus;
+    private JLabel isGameOver, isGameOnPause;
+    private JLabel finalScore;
     private JLabel score;
     private JLabel line;
     private Shape curPiece, nextPiece;
@@ -33,9 +34,11 @@ public class Board extends JPanel {
 
     private void initBoard(Tetris parent) {
         setFocusable(true);
-        gameStatus = parent.getStatusBar();
         score = parent.getScore();
         line = parent.getLine();
+        isGameOnPause = parent.getIsGameOnPause();
+        isGameOver = parent.getIsGameOver();
+        finalScore = parent.getFinalScore();
         addKeyListener(new TAdapter());
     }
 
@@ -73,9 +76,9 @@ public class Board extends JPanel {
         isPaused = !isPaused;
 
         if (isPaused) {
-            gameStatus.setText("Game on Pause");
+            isGameOnPause.setText("Game on Pause");
         } else {
-            gameStatus.setText(" ");
+            isGameOnPause.setText(" ");
             line.setText(String.valueOf(numLinesRemoved));
         }
         repaint();
@@ -166,8 +169,9 @@ public class Board extends JPanel {
             curPiece.setShape(ShapeList.NoShape);
             timer.stop();
 
-            String msg = String.format("Game over.\nScore: %d", scoreCounter);
-            gameStatus.setText(msg);
+            isGameOver.setText("Game Over");
+            String msg = String.format("Score: %d", scoreCounter);
+            finalScore.setText(msg);
         }
 
         nextPiece();
