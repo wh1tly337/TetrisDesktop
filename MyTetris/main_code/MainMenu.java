@@ -12,7 +12,7 @@ public class MainMenu extends JFrame {
         JPanel panel = new JPanel();
         add(panel);
 
-        ImageIcon logo = new ImageIcon("/Users/user/IdeaProjects/TetrisMacOS/MyTetris/TETRIS.png");
+        ImageIcon logo = new ImageIcon("/Users/user/IdeaProjects/TetrisMacOS/MyTetris/TETRIS_logo.png");
         JLabel background = new JLabel("", logo, JLabel.CENTER);
         background.setBounds(0, 40, 550, 120);
         add(background);
