@@ -1,7 +1,10 @@
 package main_code;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Tetris extends JFrame {
     private JLabel gameOverText, gameOnPauseText;
@@ -18,6 +21,8 @@ public class Tetris extends JFrame {
         gameOnPauseText = new JLabel(" ");
         gameOverText = new JLabel(" ");
         finalScore = new JLabel(" ");
+
+        addMusic();
 
         getContentPane().setLayout(null);
 
@@ -95,6 +100,31 @@ public class Tetris extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+    }
+
+    private void addMusic() {
+        String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/Tetris.wav";
+        AudioInputStream audioInputStream;
+        try {
+            audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+        } catch (UnsupportedAudioFileException | IOException e) {
+            throw new RuntimeException(e);
+        }
+        Clip clip;
+        try {
+            clip = AudioSystem.getClip();
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            clip.open(audioInputStream);
+        } catch (LineUnavailableException | IOException e) {
+            throw new RuntimeException(e);
+        }
+        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-30.0f);
+        clip.loop(10000);
+        clip.start();
     }
 
     JLabel getGameOverText() {
