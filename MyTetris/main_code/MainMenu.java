@@ -20,26 +20,26 @@ public class MainMenu extends JFrame {
         JButton startBtn = new JButton("START GAME"); // making button
         startBtn.setBounds(162, 200, 225, 75); // set button coords on board
         startBtn.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        startBtn.setBackground(Color.gray); // delete 3 lines to button style go back
-        startBtn.setOpaque(true);
-        startBtn.setBorderPainted(false); // to there
+//        startBtn.setBackground(Color.gray); // delete 3 lines to button style go back
+//        startBtn.setOpaque(true);
+//        startBtn.setBorderPainted(false); // to there
         add(startBtn); // add button to board
 
         JButton settingsBtn = new JButton("GAME SETTINGS");
         settingsBtn.setBounds(162, 285, 225, 75);
         settingsBtn.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        settingsBtn.setBackground(Color.gray);
-        settingsBtn.setOpaque(true);
-        settingsBtn.setBorderPainted(false);
+//        settingsBtn.setBackground(Color.gray);
+//        settingsBtn.setOpaque(true);
+//        settingsBtn.setBorderPainted(false);
         add(settingsBtn);
 
 
         JButton closeBtn = new JButton("CLOSE THE GAME");
         closeBtn.setBounds(162, 370, 225, 75);
         closeBtn.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        closeBtn.setBackground(Color.gray);
-        closeBtn.setOpaque(true);
-        closeBtn.setBorderPainted(false);
+//        closeBtn.setBackground(Color.gray);
+//        closeBtn.setOpaque(true);
+//        closeBtn.setBorderPainted(false);
         add(closeBtn);
 
 

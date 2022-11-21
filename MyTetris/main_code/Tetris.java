@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Tetris extends JFrame {
-    private JLabel isGameOver, isGameOnPause;
+    private JLabel gameOverText, gameOnPauseText;
     private JLabel score, finalScore;
     private JLabel line;
 
@@ -15,8 +15,8 @@ public class Tetris extends JFrame {
     private void initUI() {
         score = new JLabel(" 0");
         line = new JLabel(" 0");
-        isGameOnPause = new JLabel(" ");
-        isGameOver = new JLabel(" ");
+        gameOnPauseText = new JLabel(" ");
+        gameOverText = new JLabel(" ");
         finalScore = new JLabel(" ");
 
         getContentPane().setLayout(null);
@@ -58,13 +58,13 @@ public class Tetris extends JFrame {
         gameBoard.add(line);
         line.setBounds(366, 170, 100, 100);
 
-        isGameOnPause.setFont(new Font("Times New Romans", Font.PLAIN, 20));
-        gameBoard.add(isGameOnPause);
-        isGameOnPause.setBounds(77, 0, 195, 100);
+        gameOnPauseText.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        gameBoard.add(gameOnPauseText);
+        gameOnPauseText.setBounds(77, 0, 195, 100);
 
-        isGameOver.setFont(new Font("Times New Romans", Font.PLAIN, 20));
-        gameBoard.add(isGameOver);
-        isGameOver.setBounds(97, 0, 195, 100);
+        gameOverText.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        gameBoard.add(gameOverText);
+        gameOverText.setBounds(97, 0, 195, 100);
 
         finalScore.setFont(new Font("Times New Romans", Font.PLAIN, 20));
         gameBoard.add(finalScore);
@@ -97,12 +97,12 @@ public class Tetris extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    JLabel getIsGameOver() {
-        return isGameOver;
+    JLabel getGameOverText() {
+        return gameOverText;
     }
 
-    JLabel getIsGameOnPause() {
-        return isGameOnPause;
+    JLabel getGameOnPauseText() {
+        return gameOnPauseText;
     }
 
     JLabel getFinalScore() {

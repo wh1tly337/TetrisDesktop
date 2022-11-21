@@ -16,12 +16,13 @@ public class Board extends JPanel {
     private boolean isFallingFinished = false;
     private boolean isPaused = false;
     private boolean wasHoldChanged = false;
+    private boolean isGameOver = false;
     private int gameSpeed = 370;
     private int level = 1;
     private int numLinesRemoved = 0;
     private int scoreCounter = 0;
     private int curX, curY, nextX, nextY, holdedX, holdedY = 0;
-    private JLabel isGameOver, isGameOnPause;
+    private JLabel gameOverText, gameOnPauseText;
     private JLabel score, finalScore;
     private JLabel line;
     private Shape curPiece, nextPiece, holdedPiece, memory;
@@ -35,8 +36,8 @@ public class Board extends JPanel {
         setFocusable(true);
         score = parent.getScore();
         line = parent.getLine();
-        isGameOnPause = parent.getIsGameOnPause();
-        isGameOver = parent.getIsGameOver();
+        gameOnPauseText = parent.getGameOnPauseText();
+        gameOverText = parent.getGameOverText();
         finalScore = parent.getFinalScore();
         addKeyListener(new TAdapter());
     }
@@ -82,22 +83,24 @@ public class Board extends JPanel {
         isPaused = !isPaused;
 
         if (isPaused) {
-            isGameOnPause.setText("Game on Pause");
+            gameOnPauseText.setText("Game on Pause");
         } else {
-            isGameOnPause.setText(" ");
+            gameOnPauseText.setText(" ");
             line.setText(String.valueOf(numLinesRemoved));
         }
         repaint();
     }
 
     private void finish() {
+        isGameOver = true;
+
         curPiece.setShape(ShapeList.EmptyShape);
         nextPiece.setShape(ShapeList.EmptyShape);
         holdedPiece.setShape(ShapeList.EmptyShape);
 
         timer.stop();
 
-        isGameOver.setText("Game Over");
+        gameOverText.setText("Game Over");
         var msg = String.format("Score: %d", scoreCounter);
         finalScore.setText(msg);
     }
@@ -138,18 +141,19 @@ public class Board extends JPanel {
 
     private void dropShapeDown() {
         int newY = curY;
-
-        while (newY > 0) {
-            if (!tryToMove(curPiece, curX, newY - 1)) {
-                break;
+        if (!isGameOver) {
+            while (newY > 0) {
+                if (!tryToMove(curPiece, curX, newY - 1)) {
+                    break;
+                }
+                newY--;
             }
-            newY--;
+
+            pieceDropped();
+
+            scoreCounter += level * 10;
+            score.setText(String.valueOf(scoreCounter));
         }
-
-        pieceDropped();
-
-        scoreCounter += level * 10;
-        score.setText(String.valueOf(scoreCounter));
     }
 
     private void oneLineDown() {
