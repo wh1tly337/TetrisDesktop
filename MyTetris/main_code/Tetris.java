@@ -1,7 +1,7 @@
 package main_code;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 
 public class Tetris extends JFrame {
     private JLabel isGameOver, isGameOnPause;
@@ -72,9 +72,10 @@ public class Tetris extends JFrame {
 
         JButton restartBtn = new JButton("Restart");
         restartBtn.setBounds(317, 492, 106, 40);
+        gameBoard.add(restartBtn);
+
         JButton backToMenuBtn = new JButton("Back to Menu");
         backToMenuBtn.setBounds(317, 560, 106, 40);
-        gameBoard.add(restartBtn);
         gameBoard.add(backToMenuBtn);
 
         backToMenuBtn.addActionListener(e -> {
