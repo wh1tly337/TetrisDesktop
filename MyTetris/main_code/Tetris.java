@@ -43,25 +43,25 @@ public class Tetris extends JFrame {
         JLabel scoreText = new JLabel("Score:");
         scoreText.setFont(new Font("Times New Romans", Font.PLAIN, 20));
         gameBoard.add(scoreText);
-        scoreText.setBounds(320, 124, 100, 100);
+        scoreText.setBounds(335, 121, 100, 100);
 
         JLabel lineText = new JLabel("Line:");
         lineText.setFont(new Font("Times New Romans", Font.PLAIN, 20));
         gameBoard.add(lineText);
-        lineText.setBounds(320, 170, 100, 100);
+        lineText.setBounds(335, 167, 100, 100);
 
         JLabel holdText = new JLabel("Holded Shape:");
         holdText.setFont(new Font("Times New Romans", Font.PLAIN, 14));
         gameBoard.add(holdText);
-        holdText.setBounds(320, 215, 100, 100);
+        holdText.setBounds(335, 215, 100, 100);
 
         score.setFont(new Font("Times New Romans", Font.PLAIN, 20));
         gameBoard.add(score);
-        score.setBounds(378, 124, 100, 100);
+        score.setBounds(393, 121, 100, 100);
 
         line.setFont(new Font("Times New Romans", Font.PLAIN, 20));
         gameBoard.add(line);
-        line.setBounds(366, 170, 100, 100);
+        line.setBounds(393, 167, 100, 100);
 
         gameOnPauseText.setFont(new Font("Times New Romans", Font.PLAIN, 20));
         gameBoard.add(gameOnPauseText);
@@ -75,12 +75,12 @@ public class Tetris extends JFrame {
         gameBoard.add(finalScore);
         finalScore.setBounds(97, 30, 195, 100);
 
-        JButton restartBtn = new JButton("Restart");
-        restartBtn.setBounds(317, 492, 106, 40);
+        JButton restartBtn = new JButton("RESTART");
+        restartBtn.setBounds(332, 492, 106, 40);
         gameBoard.add(restartBtn);
 
-        JButton backToMenuBtn = new JButton("Back to Menu");
-        backToMenuBtn.setBounds(317, 560, 106, 40);
+        JButton backToMenuBtn = new JButton("BACK TO MENU");
+        backToMenuBtn.setBounds(332, 560, 106, 40);
         gameBoard.add(backToMenuBtn);
 
         backToMenuBtn.addActionListener(e -> {
@@ -93,6 +93,19 @@ public class Tetris extends JFrame {
             Tetris tetris = new Tetris();
             tetris.setVisible(true);
         });
+
+        JPanel downRect = new JPanel();
+        downRect.setBackground(Color.DARK_GRAY);
+        downRect.setBounds(300,416,150,200);
+        gameBoard.add(downRect);
+        JPanel middleRect = new JPanel();
+        middleRect.setBackground(Color.DARK_GRAY);
+        middleRect.setBounds(300,133,150,150);
+        gameBoard.add(middleRect);
+        JPanel leftRect = new JPanel();
+        leftRect.setBackground(Color.DARK_GRAY);
+        leftRect.setBounds(300,0,35,600);
+        gameBoard.add(leftRect);
 
         setTitle("T E T R I S");
         getContentPane().setBackground(Color.DARK_GRAY);

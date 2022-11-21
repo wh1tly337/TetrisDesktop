@@ -21,7 +21,8 @@ public class Board extends JPanel {
     private int level = 1;
     private int numLinesRemoved = 0;
     private int scoreCounter = 0;
-    private int curX, curY, nextX, nextY, holdedX, holdedY = 0;
+    private int curX, curY = 0;
+    private double nextX, nextY, holdedX, holdedY = 0;
     private JLabel gameOverText, gameOnPauseText;
     private JLabel score, finalScore;
     private JLabel line;
@@ -119,14 +120,16 @@ public class Board extends JPanel {
 
     private void nextPiece() {
         nextPiece.setRandomShape();
-        nextX = BOARD_WIDTH / 2 - 1; // +1 old value
-        nextY = BOARD_HEIGHT - 1;
+        nextX = BOARD_WIDTH / 2 - 0.35; // +1 old value
+        nextY = BOARD_HEIGHT - 0.9;
     }
 
     private void holdPiece() {
         if (!wasHoldChanged) {
             if (holdedPiece.getShape() == ShapeList.EmptyShape) {
                 holdedPiece = curPiece;
+                holdedX = BOARD_WIDTH / 2 - 0.35;
+                holdedY = BOARD_HEIGHT - 1.34;
                 newPiece();
             } else {
                 memory = holdedPiece;
@@ -180,25 +183,30 @@ public class Board extends JPanel {
     }
 
     private void pieceDropped() {
-        for (int i = 0; i < 4; i++) {
-            int x = curX + curPiece.x(i);
-            int y = curY - curPiece.y(i);
+        if (!isGameOver) {
+            for (int i = 0; i < 4; i++) {
+                int x = curX + curPiece.x(i);
+                int y = curY - curPiece.y(i);
 
-            try {
-                board[(y * BOARD_WIDTH) + x] = curPiece.getShape();
+                try {
+                    board[(y * BOARD_WIDTH) + x] = curPiece.getShape();
 
-                scoreCounter += level * 5;
-                score.setText(String.valueOf(scoreCounter));
-            } catch (ArrayIndexOutOfBoundsException e) {
-                finish();
+                    scoreCounter += level * 5;
+                    score.setText(String.valueOf(scoreCounter));
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    finish();
+                }
             }
-        }
 
-        removeFullLines();
-        wasHoldChanged = false;
+            removeFullLines();
+            wasHoldChanged = false;
 
-        if (!isFallingFinished) {
-            newPiece();
+            if (!isFallingFinished) {
+                newPiece();
+            }
+        } else {
+            var msg = String.format("Score: %d", scoreCounter);
+            finalScore.setText(msg);
         }
     }
 
@@ -226,53 +234,59 @@ public class Board extends JPanel {
     }
 
     private void removeFullLines() {
-        int numFullLines = 0;
-        for (int i = BOARD_HEIGHT - 1; i >= 0; i--) {
-            boolean lineIsFull = true;
+        if (!isGameOver) {
+            int numFullLines = 0;
 
-            for (int j = 0; j < BOARD_WIDTH; j++) {
-                if (shapeAt(j, i) == ShapeList.EmptyShape) {
-                    lineIsFull = false;
-                    break;
+            for (int i = BOARD_HEIGHT - 1; i >= 0; i--) {
+                boolean lineIsFull = true;
+
+                for (int j = 0; j < BOARD_WIDTH; j++) {
+                    if (shapeAt(j, i) == ShapeList.EmptyShape) {
+                        lineIsFull = false;
+                        break;
+                    }
                 }
-            }
 
-            if (lineIsFull) {
-                numFullLines++;
-                for (int k = i; k < BOARD_HEIGHT - 1; k++) {
-                    for (int j = 0; j < BOARD_WIDTH; j++) {
-                        board[(k * BOARD_WIDTH) + j] = shapeAt(j, k + 1);
+                if (lineIsFull) {
+                    numFullLines++;
+                    for (int k = i; k < BOARD_HEIGHT - 1; k++) {
+                        for (int j = 0; j < BOARD_WIDTH; j++) {
+                            board[(k * BOARD_WIDTH) + j] = shapeAt(j, k + 1);
+                        }
                     }
                 }
             }
-        }
 
-        if (numLinesRemoved % 10 == 0 && numLinesRemoved != 0) {
-            if (gameSpeed > 100) {
-                gameSpeed -= 18;
-                level++;
-            }
-        }
-
-        if (numFullLines > 0) {
-            if (numFullLines == 1) {
-                scoreCounter += level * 40;
-                score.setText(String.valueOf(scoreCounter));
-            } else if (numFullLines == 2) {
-                scoreCounter += level * 100;
-                score.setText(String.valueOf(scoreCounter));
-            } else if (numFullLines == 3) {
-                scoreCounter += level * 300;
-                score.setText(String.valueOf(scoreCounter));
-            } else if (numFullLines == 4) {
-                scoreCounter += level * 1200;
-                score.setText(String.valueOf(scoreCounter));
+            if (numLinesRemoved % 10 == 0 && numLinesRemoved != 0) {
+                if (gameSpeed > 100) {
+                    gameSpeed -= 18;
+                    level++;
+                }
             }
 
-            numLinesRemoved += numFullLines;
-            line.setText(String.valueOf(numLinesRemoved));
-            isFallingFinished = true;
-            curPiece.setShape(ShapeList.EmptyShape);
+            if (numFullLines > 0) {
+                if (numFullLines == 1) {
+                    scoreCounter += level * 40;
+                    score.setText(String.valueOf(scoreCounter));
+                } else if (numFullLines == 2) {
+                    scoreCounter += level * 100;
+                    score.setText(String.valueOf(scoreCounter));
+                } else if (numFullLines == 3) {
+                    scoreCounter += level * 300;
+                    score.setText(String.valueOf(scoreCounter));
+                } else if (numFullLines == 4) {
+                    scoreCounter += level * 1200;
+                    score.setText(String.valueOf(scoreCounter));
+                }
+
+                numLinesRemoved += numFullLines;
+                line.setText(String.valueOf(numLinesRemoved));
+                isFallingFinished = true;
+                curPiece.setShape(ShapeList.EmptyShape);
+            }
+        } else {
+            var msg = String.format("Score: %d", scoreCounter);
+            finalScore.setText(msg);
         }
     }
 
@@ -309,8 +323,8 @@ public class Board extends JPanel {
         if (nextPiece.getShape() != ShapeList.EmptyShape) {
             for (int i = 0; i < 4; i++) {
 
-                int x = nextX + nextPiece.x(i);
-                int y = nextY - nextPiece.y(i);
+                double x = nextX + nextPiece.x(i);
+                double y = nextY - nextPiece.y(i);
 
                 drawPiece(g, x * squareWidth() + 230, boardTop + (BOARD_HEIGHT - y - 1) * squareHeight() + 40, nextPiece.getShape());
             }
@@ -319,15 +333,15 @@ public class Board extends JPanel {
         if (holdedPiece.getShape() != ShapeList.EmptyShape) {
             for (int i = 0; i < 4; i++) {
 
-                int x = holdedX + holdedPiece.x(i);
-                int y = holdedY - holdedPiece.y(i);
+                double x = holdedX + holdedPiece.x(i);
+                double y = holdedY - holdedPiece.y(i);
 
                 drawPiece(g, x * squareWidth() + 230, boardTop + (BOARD_HEIGHT - y - 1) * squareHeight() + 310, holdedPiece.getShape());
             }
         }
     }
 
-    private void drawPiece(Graphics g, int x, int y, ShapeList shape) {
+    private void drawPiece(Graphics g, double x, double y, ShapeList shape) {
         Color[] colors = {
                 new Color(0, 0, 0),
                 new Color(204, 102, 102),
@@ -342,17 +356,17 @@ public class Board extends JPanel {
         var color = colors[shape.ordinal()];
 
         g.setColor(color);
-        g.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2);
+        g.fillRect((int) (x + 1), (int) (y + 1), squareWidth() - 2, squareHeight() - 2);
 
         g.setColor(color.brighter());
-        g.drawLine(x, y + squareHeight() - 1, x, y);
-        g.drawLine(x, y, x + squareWidth() - 1, y);
+        g.drawLine((int) x, (int) (y + squareHeight() - 1), (int) x, (int) y);
+        g.drawLine((int) x, (int) y, (int) (x + squareWidth() - 1), (int) y);
 
         g.setColor(color.darker());
-        g.drawLine(x + 1, y + squareHeight() - 1,
-                x + squareWidth() - 1, y + squareHeight() - 1);
-        g.drawLine(x + squareWidth() - 1, y + squareHeight() - 1,
-                x + squareWidth() - 1, y + 1);
+        g.drawLine((int) (x + 1), (int) (y + squareHeight() - 1),
+                (int) (x + squareWidth() - 1), (int) (y + squareHeight() - 1));
+        g.drawLine((int) (x + squareWidth() - 1), (int) (y + squareHeight() - 1),
+                (int) (x + squareWidth() - 1), (int) (y + 1));
     }
 
     private class GameCycle implements ActionListener {
