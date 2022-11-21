@@ -22,7 +22,7 @@ public class Tetris extends JFrame {
         gameOverText = new JLabel(" ");
         finalScore = new JLabel(" ");
 
-        addMusic();
+//        addMusic();
 
         getContentPane().setLayout(null);
 

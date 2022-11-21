@@ -153,15 +153,23 @@ public class Board extends JPanel {
 
             scoreCounter += level * 10;
             score.setText(String.valueOf(scoreCounter));
+        } else {
+            var msg = String.format("Score: %d", scoreCounter);
+            finalScore.setText(msg);
         }
     }
 
     private void oneLineDown() {
-        if (!tryToMove(curPiece, curX, curY - 1)) {
-            pieceDropped();
+        if (!isGameOver) {
+            if (!tryToMove(curPiece, curX, curY - 1)) {
+                pieceDropped();
 
-            scoreCounter += level;
-            score.setText(String.valueOf(scoreCounter));
+                scoreCounter += level;
+                score.setText(String.valueOf(scoreCounter));
+            }
+        } else {
+            var msg = String.format("Score: %d", scoreCounter);
+            finalScore.setText(msg);
         }
     }
 
@@ -178,6 +186,9 @@ public class Board extends JPanel {
 
             try {
                 board[(y * BOARD_WIDTH) + x] = curPiece.getShape();
+
+                scoreCounter += level * 5;
+                score.setText(String.valueOf(scoreCounter));
             } catch (ArrayIndexOutOfBoundsException e) {
                 finish();
             }
@@ -185,9 +196,6 @@ public class Board extends JPanel {
 
         removeFullLines();
         wasHoldChanged = false;
-
-        scoreCounter += level * 5;
-        score.setText(String.valueOf(scoreCounter));
 
         if (!isFallingFinished) {
             newPiece();
