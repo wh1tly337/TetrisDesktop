@@ -12,11 +12,10 @@ public class MainMenu extends JFrame {
         JPanel panel = new JPanel();
         getContentPane().add(panel);
 
-//        board.setLayout(null);
-//        ImageIcon img = new ImageIcon("/Users/user/IdeaProjects/TetrisMacOS/MyTetris/tetrisBackground.jpg");
-//        JLabel background = new JLabel("", img, JLabel.CENTER);
-//        background.setBounds(0, 0, 300, 600);
-//        board.add(background);
+        ImageIcon logo = new ImageIcon("/Users/user/IdeaProjects/TetrisMacOS/MyTetris/TETRIS.png");
+        JLabel background = new JLabel("", logo, JLabel.CENTER);
+        background.setBounds(0, 40, 550, 120);
+        add(background);
 
         JButton startBtn = new JButton("Start Game"); // making button
         JButton settingsBtn = new JButton("Game Settings");
