@@ -18,14 +18,14 @@ public class MainMenu extends JFrame {
 //        background.setBounds(0, 0, 300, 600);
 //        board.add(background);
 
-        JButton startBtn = new JButton("Start Game");
+        JButton startBtn = new JButton("Start Game"); // making button
         JButton settingsBtn = new JButton("Game Settings");
         JButton closeBtn = new JButton("Close The Game");
-        startBtn.setBounds(162, 200, 225, 75);
+        startBtn.setBounds(162, 200, 225, 75); // set button coords on board
         settingsBtn.setBounds(162, 285, 225, 75);
         closeBtn.setBounds(162, 370, 225, 75);
-        getContentPane().setLayout(null);
-        getContentPane().add(startBtn);
+        getContentPane().setLayout(null); // need for right working
+        getContentPane().add(startBtn); // add button to board
         getContentPane().add(settingsBtn);
         getContentPane().add(closeBtn);
 

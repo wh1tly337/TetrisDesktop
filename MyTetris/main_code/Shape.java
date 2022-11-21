@@ -5,7 +5,7 @@ import java.util.Random;
 public class Shape {
 
     protected enum ShapeList {
-        NoShape, ZShape, SShape, LineShape,
+        EmptyShape, ZShape, SShape, LineShape,
         TShape, SquareShape, LShape, MirroredLShape
     }
 
@@ -14,7 +14,7 @@ public class Shape {
 
     public Shape() {
         coords = new int[4][2];
-        setShape(ShapeList.NoShape);
+        setShape(ShapeList.EmptyShape);
     }
 
     void setShape(ShapeList shape) {
@@ -65,15 +65,6 @@ public class Shape {
         setShape(values[x]);
     }
 
-    public int minX() {
-        int m = coords[0][0];
-        for (int i = 0; i < 4; i++) {
-            m = Math.min(m, coords[i][0]);
-        }
-        return m;
-    }
-
-
     int minY() {
         int m = coords[0][1];
         for (int i = 0; i < 4; i++) {
@@ -82,20 +73,21 @@ public class Shape {
         return m;
     }
 
-    Shape rotateLeft() {
-        if (pieceShape == ShapeList.SquareShape) {
-            return this;
-        }
-
-        var result = new Shape();
-        result.pieceShape = pieceShape;
-
-        for (int i = 0; i < 4; i++) {
-            result.setX(i, y(i));
-            result.setY(i, -x(i));
-        }
-        return result;
-    }
+// for future settings
+//    Shape rotateLeft() {
+//        if (pieceShape == ShapeList.SquareShape) {
+//            return this;
+//        }
+//
+//        var result = new Shape();
+//        result.pieceShape = pieceShape;
+//
+//        for (int i = 0; i < 4; i++) {
+//            result.setX(i, y(i));
+//            result.setY(i, -x(i));
+//        }
+//        return result;
+//    }
 
     Shape rotateRight() {
 
