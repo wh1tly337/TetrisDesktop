@@ -116,7 +116,8 @@ public class Tetris extends JFrame {
     }
 
     private void addMusic() {
-        String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/TETRIS_music.wav";
+//        String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/TETRIS_music.wav";
+        String soundName = "C:\\Users\\wh1tly337\\IdeaProjects\\TetrisMacOS\\MyTetris\\TETRIS_music.wav";
         AudioInputStream audioInputStream;
         try {
             audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());

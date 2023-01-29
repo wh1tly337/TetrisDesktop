@@ -57,7 +57,6 @@ public class Shape {
     }
 
     void setRandomShape() {
-
         var r = new Random();
         int x = Math.abs(r.nextInt()) % 7 + 1;
 

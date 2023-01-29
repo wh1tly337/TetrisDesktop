@@ -28,6 +28,7 @@ public class Board extends JPanel {
     private JLabel line;
     private Shape curPiece, nextPiece, holdedPiece, memory;
     private ShapeList[] board;
+    private String[] nxtmass;
 
     public Board(Tetris parent) {
         initBoard(parent);
