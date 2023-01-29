@@ -29,6 +29,11 @@ public class Board extends JPanel {
     private Shape curPiece, nextPiece, holdedPiece, memory;
     private ShapeList[] board;
 
+    //TODO ошибка в логике, мне нужно сохранять nextShape в отдельную переменную, которая будет храниться один игровой цикл, а потом присваиваться curPiece
+    // тогда новая и текущая фигуры будут показываться правильно, просто нужно понять как удерживать next фигуру один цикл и при этом создавать новую фигуру для следующего цикла
+    // Если говорить коротко, то у меня просто проблема в логике из-за того что фигуры создаются и хранятся неправильно, если это исправить, то отрисовка будет работать хорошо
+    // можно попробовать переписать void с логикой, чтобы он был в одном месте, а не в нескольких
+
     public Board(Tetris parent) {
         initBoard(parent);
     }
@@ -119,7 +124,7 @@ public class Board extends JPanel {
     }
 
     private void nextPiece() {
-        nextPiece.setNextRandomShape(); // TODO need to save this shape to new value and give to curPiece this new value
+        nextPiece.setRandomShape(); // TODO need to save this shape to new value and give to curPiece this new value
         nextX = BOARD_WIDTH / 2 - 0.35; // +1 old value
         nextY = BOARD_HEIGHT - 0.9;
     }
