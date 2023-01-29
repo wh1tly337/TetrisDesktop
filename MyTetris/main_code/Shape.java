@@ -64,6 +64,14 @@ public class Shape {
         setShape(values[x]);
     }
 
+    void setNextRandomShape() {
+        var r = new Random();
+        int x = Math.abs(r.nextInt()) % 7 + 1;
+
+        ShapeList[] values = ShapeList.values();
+        setShape(values[x]);
+    }
+
     int minY() {
         int m = coords[0][1];
         for (int i = 0; i < 4; i++) {

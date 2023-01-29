@@ -28,7 +28,6 @@ public class Board extends JPanel {
     private JLabel line;
     private Shape curPiece, nextPiece, holdedPiece, memory;
     private ShapeList[] board;
-    private String[] nxtmass;
 
     public Board(Tetris parent) {
         initBoard(parent);
@@ -120,7 +119,7 @@ public class Board extends JPanel {
     }
 
     private void nextPiece() {
-        nextPiece.setRandomShape();
+        nextPiece.setNextRandomShape(); // TODO need to save this shape to new value and give to curPiece this new value
         nextX = BOARD_WIDTH / 2 - 0.35; // +1 old value
         nextY = BOARD_HEIGHT - 0.9;
     }
@@ -133,7 +132,7 @@ public class Board extends JPanel {
                 holdedY = BOARD_HEIGHT - 1.34;
                 newPiece();
             } else {
-                memory = holdedPiece;
+                memory = holdedPiece; // TODO mb problem with holded shape here
                 holdedPiece = curPiece;
                 curPiece = memory;
                 curX = BOARD_WIDTH / 2 - 1; // +1 old value
