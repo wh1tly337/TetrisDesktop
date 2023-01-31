@@ -32,6 +32,7 @@ public class Board extends JPanel {
     private JLabel line;
     private Shape curPiece, nextPiece, holdedPiece, memory;
     private ShapeList[] board;
+    public static Clip clip, music;
     private boolean needSounds = true;
     private boolean needMusic = true;
 
@@ -94,6 +95,7 @@ public class Board extends JPanel {
     private void finish() {
         isGameOver = true;
 
+        music.stop();
         addSounds("GameOver");
 
         curPiece.setShape(ShapeList.EmptyShape);
@@ -450,7 +452,6 @@ public class Board extends JPanel {
         } catch (UnsupportedAudioFileException | IOException e) {
             throw new RuntimeException(e);
         }
-        Clip clip;
         try {
             clip = AudioSystem.getClip();
         } catch (LineUnavailableException e) {
@@ -463,9 +464,12 @@ public class Board extends JPanel {
         }
         FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         gainControl.setValue(-40.0f);
+
         if (needLoop) {
+            music = clip;
             clip.loop(10000);
         }
         clip.start();
     }
+
 }
