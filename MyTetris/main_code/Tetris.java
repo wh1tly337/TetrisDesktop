@@ -33,45 +33,55 @@ public class Tetris extends JFrame {
         gameBoard.setBounds(35, 35, 435, 601);
         gameBoard.setBackground(Color.GRAY);
 
-        JSeparator separator = new JSeparator();
-        separator.setOrientation(SwingConstants.VERTICAL);
-        separator.setBounds(295, -2, 100, 604);
-        separator.setBackground(Color.DARK_GRAY);
-        separator.setForeground(Color.DARK_GRAY);
-        gameBoard.add(separator);
+        // this separator need only for macOS
+
+//        JSeparator separator = new JSeparator();
+//        separator.setOrientation(SwingConstants.VERTICAL);
+//        separator.setBounds(295, -2, 100, 604);
+//        separator.setBackground(Color.DARK_GRAY);
+//        separator.setForeground(Color.DARK_GRAY);
+//        gameBoard.add(separator);
 
         JLabel scoreText = new JLabel("Score:");
         scoreText.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        scoreText.setForeground(Color.black);
         gameBoard.add(scoreText);
         scoreText.setBounds(335, 121, 100, 100);
 
         JLabel lineText = new JLabel("Line:");
         lineText.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        lineText.setForeground(Color.black);
         gameBoard.add(lineText);
         lineText.setBounds(335, 167, 100, 100);
 
         JLabel holdText = new JLabel("Holded Shape:");
         holdText.setFont(new Font("Times New Romans", Font.PLAIN, 14));
+        holdText.setForeground(Color.black);
         gameBoard.add(holdText);
         holdText.setBounds(335, 215, 100, 100);
 
         score.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        score.setForeground(Color.black);
         gameBoard.add(score);
         score.setBounds(393, 121, 100, 100);
 
         line.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        line.setForeground(Color.black);
         gameBoard.add(line);
         line.setBounds(393, 167, 100, 100);
 
         gameOnPauseText.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        gameOnPauseText.setForeground(Color.black);
         gameBoard.add(gameOnPauseText);
         gameOnPauseText.setBounds(77, 0, 195, 100);
 
         gameOverText.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        gameOverText.setForeground(Color.black);
         gameBoard.add(gameOverText);
         gameOverText.setBounds(97, 0, 195, 100);
 
         finalScore.setFont(new Font("Times New Romans", Font.PLAIN, 20));
+        finalScore.setForeground(Color.black);
         gameBoard.add(finalScore);
         finalScore.setBounds(97, 30, 195, 100);
 
@@ -96,20 +106,22 @@ public class Tetris extends JFrame {
 
         JPanel downRect = new JPanel();
         downRect.setBackground(Color.DARK_GRAY);
-        downRect.setBounds(300,416,150,200);
+        downRect.setBounds(300, 416, 150, 200);
         gameBoard.add(downRect);
         JPanel middleRect = new JPanel();
         middleRect.setBackground(Color.DARK_GRAY);
-        middleRect.setBounds(300,133,150,150);
+        middleRect.setBounds(300, 133, 150, 150);
         gameBoard.add(middleRect);
         JPanel leftRect = new JPanel();
         leftRect.setBackground(Color.DARK_GRAY);
-        leftRect.setBounds(300,0,35,600);
+        leftRect.setBounds(300, 0, 35, 600);
         gameBoard.add(leftRect);
 
         setTitle("T E T R I S");
         getContentPane().setBackground(Color.DARK_GRAY);
-        setSize(505, 699);
+        //size for macOS
+//        setSize(505, 699);
+        setSize(510, 699);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
