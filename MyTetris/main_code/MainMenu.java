@@ -11,6 +11,7 @@ public class MainMenu extends JFrame {
     public final void initUI() {
         JPanel panel = new JPanel();
         add(panel);
+
         ImageIcon logo = new ImageIcon("MyTetris\\TETRIS_logo.png");
         JLabel background = new JLabel("", logo, JLabel.CENTER);
         background.setBounds(0, 40, 550, 120);
@@ -24,11 +25,9 @@ public class MainMenu extends JFrame {
         settingsBtn.setBounds(162, 285, 225, 75);
         buttonsStyle(settingsBtn);
 
-
         JButton closeBtn = new JButton("EXIT");
         closeBtn.setBounds(162, 370, 225, 75);
         buttonsStyle(closeBtn);
-
 
         startBtn.addActionListener(e -> {
             this.dispose();
@@ -44,13 +43,14 @@ public class MainMenu extends JFrame {
 
         setLayout(null); // need for right working
         JLabel bottomText = new JLabel("Made by Ivanovichev Ivan");
-        bottomText.setFont(new Font("Times New Romans", Font.PLAIN, 10));
+        bottomText.setFont(new Font("Tahoma", Font.PLAIN, 10));
         bottomText.setBounds(215, 440, 200, 50);
+        bottomText.setForeground(Color.black);
         add(bottomText);
 
         setTitle("T E T R I S");
         setResizable(false);
-        setSize(550, 500);
+        setSize(550, 511);
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.darkGray); //all window background
         setDefaultCloseOperation(EXIT_ON_CLOSE);

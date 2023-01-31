@@ -10,15 +10,15 @@ public class Settings extends JFrame {
 
     public final void initUI() {
         JPanel panel = new JPanel();
-        getContentPane().add(panel);
+        add(panel);
 
         JButton applyBtn = new JButton("Apply changes");
-        JButton backBtn = new JButton("Back to Menu");
         applyBtn.setBounds(162, 200, 225, 75);
+        buttonsStyle(applyBtn);
+
+        JButton backBtn = new JButton("Back to Menu");
         backBtn.setBounds(162, 285, 225, 75);
-        getContentPane().setLayout(null);
-        getContentPane().add(applyBtn);
-        getContentPane().add(backBtn);
+        buttonsStyle(backBtn);
 
         applyBtn.addActionListener(e -> {
             System.out.println("All working");
@@ -30,15 +30,27 @@ public class Settings extends JFrame {
             mainMenu.setVisible(true);
         });
 
+        setLayout(null);
         JLabel bottomText = new JLabel("Made by Ivanovichev Ivan");
-        bottomText.setFont(new Font("Times New Romans", Font.PLAIN, 10));
-        getContentPane().add(bottomText);
+        bottomText.setFont(new Font("Tahoma", Font.PLAIN, 10));
         bottomText.setBounds(215, 440, 200, 50);
+        bottomText.setForeground(Color.black);
+        add(bottomText);
 
-        setTitle("Settings");
+        setTitle("SETTINGS");
         setResizable(false);
-        setSize(550, 500);
+        setSize(550, 511);
         setLocationRelativeTo(null);
+        getContentPane().setBackground(Color.darkGray); //all window background
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    public void buttonsStyle(JButton button) {
+        button.setFocusable(false);
+        button.setBorderPainted(false);
+        button.setBackground(Color.gray);
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        add(button);
     }
 }

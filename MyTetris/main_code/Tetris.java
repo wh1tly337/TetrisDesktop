@@ -98,8 +98,8 @@ public class Tetris extends JFrame {
         backToMenuBtn.addActionListener(e -> {
             Board.music.stop();
             this.dispose();
-            MainMenu settings = new MainMenu();
-            settings.setVisible(true);
+            MainMenu menu = new MainMenu();
+            menu.setVisible(true);
         });
         restartBtn.addActionListener(e -> {
             Board.music.stop();
