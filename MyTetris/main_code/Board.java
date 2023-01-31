@@ -2,12 +2,16 @@ package main_code;
 
 import main_code.Shape.ShapeList;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
 
 public class Board extends JPanel {
     private final int BOARD_WIDTH = 10;
@@ -28,6 +32,7 @@ public class Board extends JPanel {
     private JLabel line;
     private Shape curPiece, nextPiece, holdedPiece, memory;
     private ShapeList[] board;
+    private boolean needSounds = true;
 
     public Board(Tetris parent) {
         initBoard(parent);
@@ -86,6 +91,8 @@ public class Board extends JPanel {
 
     private void finish() {
         isGameOver = true;
+
+        addSounds("GameOver");
 
         curPiece.setShape(ShapeList.EmptyShape);
         nextPiece.setShape(ShapeList.EmptyShape);
@@ -198,6 +205,7 @@ public class Board extends JPanel {
 
             if (!isFallingFinished) {
                 newPiece();
+                addSounds("BrickDown");
             }
         } else {
             var msg = String.format("Score: %d", scoreCounter);
@@ -243,6 +251,7 @@ public class Board extends JPanel {
                 }
 
                 if (lineIsFull) {
+                    addSounds("ClearLine");
                     numFullLines++;
                     for (int k = i; k < BOARD_HEIGHT - 1; k++) {
                         for (int j = 0; j < BOARD_WIDTH; j++) {
@@ -408,5 +417,44 @@ public class Board extends JPanel {
                 case KeyEvent.VK_ENTER -> holdPiece();
             }
         }
+    }
+
+    private void addSounds(String fromWhere) {
+        if (needSounds) {
+            if (Objects.equals(fromWhere, "BrickDown")) {
+                String soundName = "C:\\Users\\wh1tly337\\IdeaProjects\\TetrisMacOS\\MyTetris\\BrickDownSound.wav";
+                music(soundName);
+            } else if (Objects.equals(fromWhere, "ClearLine")) {
+                String soundName = "C:\\Users\\wh1tly337\\IdeaProjects\\TetrisMacOS\\MyTetris\\ClearLineSound.wav";
+                music(soundName);
+            } else if (Objects.equals(fromWhere, "GameOver")) {
+                String soundName = "C:\\Users\\wh1tly337\\IdeaProjects\\TetrisMacOS\\MyTetris\\GameOverSound.wav";
+                music(soundName);
+            }
+        }
+    }
+
+    static void music(String soundName) {
+        AudioInputStream audioInputStream;
+        try {
+            audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+        } catch (UnsupportedAudioFileException | IOException e) {
+            throw new RuntimeException(e);
+        }
+        Clip clip;
+        try {
+            clip = AudioSystem.getClip();
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            clip.open(audioInputStream);
+        } catch (LineUnavailableException | IOException e) {
+            throw new RuntimeException(e);
+        }
+        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-30.0f);
+//        clip.loop(10000);
+        clip.start();
     }
 }

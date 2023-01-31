@@ -147,27 +147,7 @@ public class Tetris extends JFrame {
         // this src only for macOS
 //        String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/TETRIS_music.wav";
         String soundName = "C:\\Users\\wh1tly337\\IdeaProjects\\TetrisMacOS\\MyTetris\\TETRIS_music.wav";
-        AudioInputStream audioInputStream;
-        try {
-            audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
-        } catch (UnsupportedAudioFileException | IOException e) {
-            throw new RuntimeException(e);
-        }
-        Clip clip;
-        try {
-            clip = AudioSystem.getClip();
-        } catch (LineUnavailableException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            clip.open(audioInputStream);
-        } catch (LineUnavailableException | IOException e) {
-            throw new RuntimeException(e);
-        }
-        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(-30.0f);
-        clip.loop(10000);
-        clip.start();
+        Board.music(soundName);
     }
 
     JLabel getGameOverText() {
