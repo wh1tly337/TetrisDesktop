@@ -33,6 +33,7 @@ public class Board extends JPanel {
     private Shape curPiece, nextPiece, holdedPiece, memory;
     private ShapeList[] board;
     private boolean needSounds = true;
+    private boolean needMusic = true;
 
     public Board(Tetris parent) {
         initBoard(parent);
@@ -73,6 +74,7 @@ public class Board extends JPanel {
         memory = new Shape();
         memory.setShape(ShapeList.EmptyShape);
 
+        addMusic();
         timer = new Timer(gameSpeed, new GameCycle());
         timer.start();
     }
@@ -423,18 +425,27 @@ public class Board extends JPanel {
         if (needSounds) {
             if (Objects.equals(fromWhere, "BrickDown")) {
                 String soundName = "C:\\Users\\wh1tly337\\IdeaProjects\\TetrisMacOS\\MyTetris\\BrickDownSound.wav";
-                music(soundName);
+                music(soundName, false);
             } else if (Objects.equals(fromWhere, "ClearLine")) {
                 String soundName = "C:\\Users\\wh1tly337\\IdeaProjects\\TetrisMacOS\\MyTetris\\ClearLineSound.wav";
-                music(soundName);
+                music(soundName, false);
             } else if (Objects.equals(fromWhere, "GameOver")) {
                 String soundName = "C:\\Users\\wh1tly337\\IdeaProjects\\TetrisMacOS\\MyTetris\\GameOverSound.wav";
-                music(soundName);
+                music(soundName, false);
             }
         }
     }
 
-    static void music(String soundName) {
+    private void addMusic() {
+        if (needMusic) {
+            // this src only for macOS
+//        String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/TETRIS_music.wav";
+            String soundName = "C:\\Users\\wh1tly337\\IdeaProjects\\TetrisMacOS\\MyTetris\\TETRIS_music.wav";
+            music(soundName, true);
+        }
+    }
+
+    static void music(String soundName, Boolean needLoop) {
         AudioInputStream audioInputStream;
         try {
             audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
@@ -453,8 +464,10 @@ public class Board extends JPanel {
             throw new RuntimeException(e);
         }
         FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(-30.0f);
-//        clip.loop(10000);
+        gainControl.setValue(-40.0f);
+        if (needLoop) {
+            clip.loop(10000);
+        }
         clip.start();
     }
 }

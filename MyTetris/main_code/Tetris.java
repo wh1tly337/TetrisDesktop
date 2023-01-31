@@ -1,10 +1,7 @@
 package main_code;
 
-import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 public class Tetris extends JFrame {
     private JLabel gameOverText, gameOnPauseText;
@@ -21,8 +18,6 @@ public class Tetris extends JFrame {
         gameOnPauseText = new JLabel(" ");
         gameOverText = new JLabel(" ");
         finalScore = new JLabel(" ");
-
-//        addMusic();
 
         getContentPane().setLayout(null);
 
@@ -141,13 +136,6 @@ public class Tetris extends JFrame {
         button.setOpaque(true);
         button.setBorderPainted(true);
         gameBoard.add(button);
-    }
-
-    private void addMusic() {
-        // this src only for macOS
-//        String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/TETRIS_music.wav";
-        String soundName = "C:\\Users\\wh1tly337\\IdeaProjects\\TetrisMacOS\\MyTetris\\TETRIS_music.wav";
-        Board.music(soundName);
     }
 
     JLabel getGameOverText() {
