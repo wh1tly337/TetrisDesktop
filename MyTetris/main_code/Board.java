@@ -61,12 +61,13 @@ public class Board extends JPanel {
     }
 
     void start() {
-        nextPiece = new Shape();
+        board = new ShapeList[BOARD_WIDTH * BOARD_HEIGHT];
+        clearBoard();
+
+        nextPiece();
 
         curPiece = new Shape();
-        curPiece.setRandomShape(); // add new shape in start of game
-        curX = BOARD_WIDTH / 2 - 1; // +1 old value
-        curY = BOARD_HEIGHT - 1 + curPiece.minY();
+        newPiece();
 
         holdedPiece = new Shape();
         holdedPiece.setShape(ShapeList.EmptyShape);
@@ -75,11 +76,6 @@ public class Board extends JPanel {
 
         memory = new Shape();
         memory.setShape(ShapeList.EmptyShape);
-
-        board = new ShapeList[BOARD_WIDTH * BOARD_HEIGHT];
-
-        clearBoard();
-        nextPiece();
 
         timer = new Timer(gameSpeed, new GameCycle());
         timer.start();
@@ -111,22 +107,24 @@ public class Board extends JPanel {
         finalScore.setText(msg);
     }
 
+    private void nextPiece() {
+        nextPiece = new Shape();
+        nextPiece.setRandomShape(); // TODO need to save this shape to new value and give to curPiece this new value
+
+        nextX = BOARD_WIDTH / 2 - 0.35; // +1 old value
+        nextY = BOARD_HEIGHT - 0.9;
+    }
+
     private void newPiece() {
         curPiece = nextPiece;
+        nextPiece();
+
         curX = BOARD_WIDTH / 2 - 1; // +1 old value
         curY = BOARD_HEIGHT - 1 + curPiece.minY();
 
         if (!tryToMove(curPiece, curX, curY)) {
             finish();
         }
-
-        nextPiece();
-    }
-
-    private void nextPiece() {
-        nextPiece.setRandomShape(); // TODO need to save this shape to new value and give to curPiece this new value
-        nextX = BOARD_WIDTH / 2 - 0.35; // +1 old value
-        nextY = BOARD_HEIGHT - 0.9;
     }
 
     private void holdPiece() {
