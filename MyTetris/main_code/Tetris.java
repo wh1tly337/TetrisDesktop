@@ -97,12 +97,16 @@ public class Tetris extends JFrame {
 
         backToMenuBtn.addActionListener(e -> {
             Board.music.stop();
+            Timer timer = Board.getTimer();
+            timer.stop();
             this.dispose();
             MainMenu menu = new MainMenu();
             menu.setVisible(true);
         });
         restartBtn.addActionListener(e -> {
             Board.music.stop();
+            Timer timer = Board.getTimer();
+            timer.stop();
             this.dispose();
             Tetris tetris = new Tetris();
             tetris.setVisible(true);

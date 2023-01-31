@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Board extends JPanel {
     private final int BOARD_WIDTH = 10;
     private final int BOARD_HEIGHT = 20;
-    private Timer timer;
+    public static Timer timer;
     private boolean isFallingFinished = false;
     private boolean isPaused = false;
     private boolean wasHoldChanged = false;
@@ -38,6 +38,10 @@ public class Board extends JPanel {
 
     public Board(Tetris parent) {
         initBoard(parent);
+    }
+
+    public static Timer getTimer(){
+        return timer;
     }
 
     private void initBoard(Tetris parent) {
