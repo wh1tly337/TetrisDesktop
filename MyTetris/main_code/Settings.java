@@ -12,12 +12,48 @@ public class Settings extends JFrame {
         JPanel panel = new JPanel();
         add(panel);
 
-        JButton applyBtn = new JButton("Apply changes");
-        applyBtn.setBounds(162, 200, 225, 75);
+        JLabel soundsText = new JLabel("Sounds");
+        soundsText.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        soundsText.setBounds(80, 75, 100, 30);
+        soundsText.setForeground(Color.black);
+        add(soundsText);
+        JButton soundsOnBtn = new JButton("On");
+        soundsOnBtn.setBounds(270, 75, 100, 30);
+        buttonsStyle(soundsOnBtn);
+        JButton soundsOffBtn = new JButton("Off");
+        soundsOffBtn.setBounds(370, 75, 100, 30);
+        buttonsStyle(soundsOffBtn);
+
+        JLabel musicText = new JLabel("Music");
+        musicText.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        musicText.setBounds(80, 145, 100, 30);
+        musicText.setForeground(Color.black);
+        add(musicText);
+        JButton musicOnBtn = new JButton("On");
+        musicOnBtn.setBounds(270, 145, 100, 30);
+        buttonsStyle(musicOnBtn);
+        JButton musicOffBtn = new JButton("Off");
+        musicOffBtn.setBounds(370, 145, 100, 30);
+        buttonsStyle(musicOffBtn);
+
+        JLabel rotateText = new JLabel("Turn (which way)");
+        rotateText.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        rotateText.setBounds(80, 215, 150, 30);
+        rotateText.setForeground(Color.black);
+        add(rotateText);
+        JButton rotateOnBtn = new JButton("Left");
+        rotateOnBtn.setBounds(270, 215, 100, 30);
+        buttonsStyle(rotateOnBtn);
+        JButton rotateOffBtn = new JButton("Right");
+        rotateOffBtn.setBounds(370, 215, 100, 30);
+        buttonsStyle(rotateOffBtn);
+
+        JButton applyBtn = new JButton("Apply Changes");
+        applyBtn.setBounds(80, 375, 150, 30);
         buttonsStyle(applyBtn);
 
-        JButton backBtn = new JButton("Back to Menu");
-        backBtn.setBounds(162, 285, 225, 75);
+        JButton backBtn = new JButton("Back To Menu");
+        backBtn.setBounds(320, 375, 150, 30);
         buttonsStyle(backBtn);
 
         applyBtn.addActionListener(e -> {
