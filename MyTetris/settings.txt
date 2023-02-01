@@ -1,0 +1,3 @@
+sounds false
+music false
+rotate right

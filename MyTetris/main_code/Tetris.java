@@ -135,7 +135,7 @@ public class Tetris extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    public void buttonsStyle(JButton button, Board gameBoard) {
+    private void buttonsStyle(JButton button, Board gameBoard) {
         button.setFocusable(false);
         button.setBorderPainted(false);
         button.setBackground(Color.gray);

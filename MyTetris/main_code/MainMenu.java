@@ -56,7 +56,7 @@ public class MainMenu extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    public void buttonsStyle(JButton button) {
+    private void buttonsStyle(JButton button) {
         button.setFont(new Font("Tahoma", Font.PLAIN, 15));
         button.setFocusable(false);
         button.setBorderPainted(false);
