@@ -96,7 +96,10 @@ public class Tetris extends JFrame {
         buttonsStyle(backToMenuBtn, gameBoard);
 
         backToMenuBtn.addActionListener(e -> {
-            Board.music.stop();
+            try {
+                Board.music.stop();
+            } catch (Exception ignored) {
+            }
             Timer timer = Board.getTimer();
             timer.stop();
             this.dispose();
@@ -104,7 +107,10 @@ public class Tetris extends JFrame {
             menu.setVisible(true);
         });
         restartBtn.addActionListener(e -> {
-            Board.music.stop();
+            try {
+                Board.music.stop();
+            } catch (Exception ignored) {
+            }
             Timer timer = Board.getTimer();
             timer.stop();
             this.dispose();

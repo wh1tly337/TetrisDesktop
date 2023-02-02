@@ -11,6 +11,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Board extends JPanel {
@@ -33,14 +34,17 @@ public class Board extends JPanel {
     private Shape curPiece, nextPiece, holdedPiece, memory;
     private ShapeList[] board;
     public static Clip clip, music;
-    private boolean needSounds = true;
-    private boolean needMusic = true;
+
+    ArrayList<String> values = Settings.fileReader();
+    boolean needSounds = Boolean.parseBoolean(Objects.requireNonNull(values).get(0));
+    boolean needMusic = Boolean.parseBoolean(values.get(1));
+    String turn = values.get(2);
 
     public Board(Tetris parent) {
         initBoard(parent);
     }
 
-    public static Timer getTimer(){
+    public static Timer getTimer() {
         return timer;
     }
 
@@ -421,7 +425,13 @@ public class Board extends JPanel {
                 case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> tryToMove(curPiece, curX + 1, curY);
                 case KeyEvent.VK_DOWN, KeyEvent.VK_S -> oneLineDown();
                 case KeyEvent.VK_UP, KeyEvent.VK_W -> dropShapeDown();
-                case KeyEvent.VK_SPACE -> tryToMove(curPiece.rotateRight(), curX, curY);
+                case KeyEvent.VK_SPACE -> {
+                    if (Objects.equals(turn, "right")){
+                        tryToMove(curPiece.rotateRight(), curX, curY);
+                    } else {
+                        tryToMove(curPiece.rotateLeft(), curX, curY);
+                    }
+                }
                 case KeyEvent.VK_ENTER -> holdPiece();
             }
         }
@@ -430,13 +440,16 @@ public class Board extends JPanel {
     private void addSounds(String fromWhere) {
         if (needSounds) {
             if (Objects.equals(fromWhere, "BrickDown")) {
-                String soundName = "MyTetris\\music_sounds\\BrickDownSound.wav";
+//                String soundName = "MyTetris\\music_sounds\\BrickDownSound.wav";
+                String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/music_sounds/BrickDownSound.wav";
                 music(soundName, false);
             } else if (Objects.equals(fromWhere, "ClearLine")) {
-                String soundName = "MyTetris\\music_sounds\\ClearLineSound.wav";
+//                String soundName = "MyTetris\\music_sounds\\ClearLineSound.wav";
+                String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/music_sounds/ClearLineSound.wav";
                 music(soundName, false);
             } else if (Objects.equals(fromWhere, "GameOver")) {
-                String soundName = "MyTetris\\music_sounds\\GameOverSound.wav";
+//                String soundName = "MyTetris\\music_sounds\\GameOverSound.wav";
+                String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/music_sounds/GameOverSound.wav";
                 music(soundName, false);
             }
         }
@@ -444,7 +457,8 @@ public class Board extends JPanel {
 
     private void addMusic() {
         if (needMusic) {
-            String soundName = "MyTetris\\music_sounds\\TETRIS_music.wav";
+//            String soundName = "MyTetris\\music_sounds\\TETRIS_music.wav";
+            String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/music_sounds/TETRIS_music.wav";
             music(soundName, true);
         }
     }

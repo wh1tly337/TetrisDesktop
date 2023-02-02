@@ -146,7 +146,8 @@ public class Settings extends JFrame {
         BufferedReader reader;
 
         try {
-            reader = new BufferedReader(new FileReader("MyTetris\\settings.txt"));
+//            reader = new BufferedReader(new FileReader("MyTetris\\settings.txt"));
+            reader = new BufferedReader(new FileReader("/Users/user/IdeaProjects/TetrisMacOS/MyTetris/settings.txt"));
             String string = reader.readLine();
             ArrayList<String> values = new ArrayList<>();
 
@@ -167,7 +168,8 @@ public class Settings extends JFrame {
 
     public void fileWriter() {
         try {
-            FileWriter writer = new FileWriter("MyTetris\\settings.txt");
+//            FileWriter writer = new FileWriter("MyTetris\\settings.txt");
+            FileWriter writer = new FileWriter("/Users/user/IdeaProjects/TetrisMacOS/MyTetris/settings.txt");
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
             bufferedWriter.write("sounds " + sounds);
