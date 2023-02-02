@@ -34,7 +34,6 @@ public class Board extends JPanel {
     private Shape curPiece, nextPiece, holdedPiece, memory;
     private ShapeList[] board;
     public static Clip clip, music;
-
     ArrayList<String> values = Settings.fileReader();
     boolean needSounds = Boolean.parseBoolean(Objects.requireNonNull(values).get(0));
     boolean needMusic = Boolean.parseBoolean(values.get(1));
