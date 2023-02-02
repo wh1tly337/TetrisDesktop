@@ -103,7 +103,10 @@ public class Board extends JPanel {
     private void finish() {
         isGameOver = true;
 
-        music.stop();
+        try {
+            music.stop();
+        } catch (Exception ignored) {
+        }
         addSounds("GameOver");
 
         curPiece.setShape(ShapeList.EmptyShape);
@@ -426,7 +429,7 @@ public class Board extends JPanel {
                 case KeyEvent.VK_DOWN, KeyEvent.VK_S -> oneLineDown();
                 case KeyEvent.VK_UP, KeyEvent.VK_W -> dropShapeDown();
                 case KeyEvent.VK_SPACE -> {
-                    if (Objects.equals(turn, "right")){
+                    if (Objects.equals(turn, "right")) {
                         tryToMove(curPiece.rotateRight(), curX, curY);
                     } else {
                         tryToMove(curPiece.rotateLeft(), curX, curY);
@@ -440,16 +443,16 @@ public class Board extends JPanel {
     private void addSounds(String fromWhere) {
         if (needSounds) {
             if (Objects.equals(fromWhere, "BrickDown")) {
-//                String soundName = "MyTetris\\music_sounds\\BrickDownSound.wav";
-                String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/music_sounds/BrickDownSound.wav";
+                String soundName = "MyTetris\\music_sounds\\BrickDownSound.wav";
+//                String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/music_sounds/BrickDownSound.wav";
                 music(soundName, false);
             } else if (Objects.equals(fromWhere, "ClearLine")) {
-//                String soundName = "MyTetris\\music_sounds\\ClearLineSound.wav";
-                String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/music_sounds/ClearLineSound.wav";
+                String soundName = "MyTetris\\music_sounds\\ClearLineSound.wav";
+//                String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/music_sounds/ClearLineSound.wav";
                 music(soundName, false);
             } else if (Objects.equals(fromWhere, "GameOver")) {
-//                String soundName = "MyTetris\\music_sounds\\GameOverSound.wav";
-                String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/music_sounds/GameOverSound.wav";
+                String soundName = "MyTetris\\music_sounds\\GameOverSound.wav";
+//                String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/music_sounds/GameOverSound.wav";
                 music(soundName, false);
             }
         }
@@ -457,8 +460,8 @@ public class Board extends JPanel {
 
     private void addMusic() {
         if (needMusic) {
-//            String soundName = "MyTetris\\music_sounds\\TETRIS_music.wav";
-            String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/music_sounds/TETRIS_music.wav";
+            String soundName = "MyTetris\\music_sounds\\TETRIS_music.wav";
+//            String soundName = "/Users/user/IdeaProjects/TetrisMacOS/MyTetris/music_sounds/TETRIS_music.wav";
             music(soundName, true);
         }
     }
