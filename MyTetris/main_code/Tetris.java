@@ -25,7 +25,8 @@ public class Tetris extends JFrame {
         add(gameBoard);
         gameBoard.setLayout(null);
         gameBoard.start();
-        gameBoard.setBounds(35, 35, 435, 601);
+//        gameBoard.setBounds(35, 35, 435, 601);
+        gameBoard.setBounds(35, 35, 500, 601);
         gameBoard.setBackground(Color.GRAY);
 
         // this separator need only for macOS
@@ -50,7 +51,6 @@ public class Tetris extends JFrame {
 
         JLabel holdText = new JLabel("Holded Shape:");
         // this size need only for macOS
-//        holdText.setFont(new Font("Tahoma", Font.PLAIN, 14));
         holdText.setFont(new Font("Tahoma", Font.PLAIN, 15));
         holdText.setForeground(Color.black);
         gameBoard.add(holdText);
@@ -59,7 +59,7 @@ public class Tetris extends JFrame {
         score.setFont(new Font("Tahoma", Font.PLAIN, 20));
         score.setForeground(Color.black);
         gameBoard.add(score);
-        score.setBounds(393, 121, 100, 100);
+        score.setBounds(393, 121, 200, 100);
 
         line.setFont(new Font("Tahoma", Font.PLAIN, 20));
         line.setForeground(Color.black);
@@ -82,17 +82,15 @@ public class Tetris extends JFrame {
         finalScore.setBounds(97, 30, 195, 100);
 
         JButton restartBtn = new JButton("RESTART");
-        restartBtn.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        restartBtn.setFont(new Font("Tahoma", Font.PLAIN, 15));
         // this size only for macOS
-//        restartBtn.setBounds(332, 492, 106, 40);
-        restartBtn.setBounds(332, 472, 103, 40);
+        restartBtn.setBounds(332, 492, 170, 40);
         buttonsStyle(restartBtn, gameBoard);
 
-        JButton backToMenuBtn = new JButton("<html>BACK<p>TO<p>MENU</html>");
+        JButton backToMenuBtn = new JButton("BACK TO MENU");
         backToMenuBtn.setFont(new Font("Tahoma", Font.PLAIN, 15));
         // this size only for macOS
-//        backToMenuBtn.setBounds(332, 560, 106, 40);
-        backToMenuBtn.setBounds(332, 540, 103, 60);
+        backToMenuBtn.setBounds(332, 560, 170, 40);
         buttonsStyle(backToMenuBtn, gameBoard);
 
         backToMenuBtn.addActionListener(e -> {
@@ -120,11 +118,11 @@ public class Tetris extends JFrame {
 
         JPanel downRect = new JPanel();
         downRect.setBackground(Color.DARK_GRAY);
-        downRect.setBounds(300, 416, 150, 200);
+        downRect.setBounds(300, 416, 200, 200);
         gameBoard.add(downRect);
         JPanel middleRect = new JPanel();
         middleRect.setBackground(Color.DARK_GRAY);
-        middleRect.setBounds(300, 133, 150, 150);
+        middleRect.setBounds(300, 133, 200, 150);
         gameBoard.add(middleRect);
         JPanel leftRect = new JPanel();
         leftRect.setBackground(Color.DARK_GRAY);
@@ -135,7 +133,7 @@ public class Tetris extends JFrame {
         getContentPane().setBackground(Color.DARK_GRAY);
         // this size only for macOS
 //        setSize(505, 699);
-        setSize(520, 699);
+        setSize(584,699);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

@@ -124,7 +124,7 @@ public class Board extends JPanel {
         nextPiece = new Shape();
         nextPiece.setRandomShape();
         //noinspection IntegerDivisionInFloatingPointContext
-        nextX = BOARD_WIDTH / 2 - 0.35; // +1 old value
+        nextX = BOARD_WIDTH / 2 + 0.7; // +1 old value
         nextY = BOARD_HEIGHT - 0.9;
     }
 
@@ -145,7 +145,7 @@ public class Board extends JPanel {
             if (holdedPiece.getShape() == ShapeList.EmptyShape) {
                 holdedPiece = curPiece;
                 //noinspection IntegerDivisionInFloatingPointContext
-                holdedX = BOARD_WIDTH / 2 - 0.35;
+                holdedX = BOARD_WIDTH / 2 + 0.7;
                 holdedY = BOARD_HEIGHT - 1.34;
                 newPiece();
             } else {
