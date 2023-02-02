@@ -6,12 +6,16 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 public class Settings extends JFrame {
     Color green = new Color(93, 187, 99);
     ArrayList<String> values = fileReader();
     boolean sounds = Boolean.parseBoolean(Objects.requireNonNull(values).get(0));
     boolean music = Boolean.parseBoolean(values.get(1));
     String turn = values.get(2);
+    JButton applyBtn = new JButton("Apply Changes");
+    boolean alert = false;
 
     public Settings() {
         initUI();
@@ -42,11 +46,13 @@ public class Settings extends JFrame {
             sounds = true;
             soundsOffBtn.setBackground(Color.gray);
             soundsOnBtn.setBackground(green);
+            changeChecker();
         });
         soundsOffBtn.addActionListener(e -> {
             sounds = false;
             soundsOnBtn.setBackground(Color.gray);
             soundsOffBtn.setBackground(green);
+            changeChecker();
         });
 
         JLabel musicText = new JLabel("Music");
@@ -70,11 +76,13 @@ public class Settings extends JFrame {
             music = true;
             musicOffBtn.setBackground(Color.gray);
             musicOnBtn.setBackground(green);
+            changeChecker();
         });
         musicOffBtn.addActionListener(e -> {
             music = false;
             musicOnBtn.setBackground(Color.gray);
             musicOffBtn.setBackground(green);
+            changeChecker();
         });
 
         JLabel rotateText = new JLabel("Turn (which way)");
@@ -98,25 +106,35 @@ public class Settings extends JFrame {
             turn = "right";
             rotateLeftBtn.setBackground(Color.gray);
             rotateRightBtn.setBackground(green);
+            changeChecker();
         });
         rotateLeftBtn.addActionListener(e -> {
             turn = "left";
             rotateRightBtn.setBackground(Color.gray);
             rotateLeftBtn.setBackground(green);
+            changeChecker();
         });
 
-        JButton applyBtn = new JButton("Apply Changes");
         applyBtn.setBounds(80, 375, 150, 30);
         buttonsStyle(applyBtn);
-        applyBtn.addActionListener(e -> fileWriter());
+        applyBtn.addActionListener(e -> {
+            alert = false;
+            fileWriter();
+            applyBtn.setText("Saved");
+            applyBtn.setBackground(green);
+        });
 
         JButton backBtn = new JButton("Back To Menu");
         backBtn.setBounds(320, 375, 150, 30);
         buttonsStyle(backBtn);
         backBtn.addActionListener(e -> {
-            this.dispose();
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.setVisible(true);
+            if (alert) {
+                showMessageDialog(null, "You don`t apply changes");
+            } else {
+                this.dispose();
+                MainMenu mainMenu = new MainMenu();
+                mainMenu.setVisible(true);
+            }
         });
 
         setLayout(null);
@@ -135,11 +153,25 @@ public class Settings extends JFrame {
     }
 
     private void buttonsStyle(JButton button) {
+        button.setFont(new Font("Tahoma", Font.PLAIN, 15));
         button.setFocusable(false);
         button.setBorderPainted(false); // обводка вокруг кнопки
         button.setBackground(Color.gray);
         button.setOpaque(true);
         add(button);
+    }
+
+    private void changeChecker() {
+        ArrayList<String> checker = fileReader();
+        boolean check_sounds = Boolean.parseBoolean(Objects.requireNonNull(checker).get(0));
+        boolean check_music = Boolean.parseBoolean(checker.get(1));
+        String check_turn = checker.get(2);
+
+        if (!Objects.equals(check_sounds, sounds) || !Objects.equals(check_music, music) || !Objects.equals(check_turn, turn)) {
+            applyBtn.setText("Apply Changes");
+            applyBtn.setBackground(Color.gray);
+            alert = true;
+        }
     }
 
     public static ArrayList<String> fileReader() {

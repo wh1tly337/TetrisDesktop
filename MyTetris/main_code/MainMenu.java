@@ -60,10 +60,9 @@ public class MainMenu extends JFrame {
     private void buttonsStyle(JButton button) {
         button.setFont(new Font("Tahoma", Font.PLAIN, 15));
         button.setFocusable(false);
-        button.setBorderPainted(false);
+        button.setBorderPainted(false); // обводка вокруг кнопки
         button.setBackground(Color.gray);
         button.setOpaque(true);
-        button.setBorderPainted(true);
         add(button);
     }
 

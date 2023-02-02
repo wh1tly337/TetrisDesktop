@@ -82,7 +82,7 @@ public class Tetris extends JFrame {
         finalScore.setBounds(97, 30, 195, 100);
 
         JButton restartBtn = new JButton("RESTART");
-        restartBtn.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        restartBtn.setFont(new Font("Tahoma", Font.PLAIN, 14));
         // this size only for macOS
 //        restartBtn.setBounds(332, 492, 106, 40);
         restartBtn.setBounds(332, 472, 103, 40);
@@ -143,10 +143,9 @@ public class Tetris extends JFrame {
 
     private void buttonsStyle(JButton button, Board gameBoard) {
         button.setFocusable(false);
-        button.setBorderPainted(false);
         button.setBackground(Color.gray);
         button.setOpaque(true);
-        button.setBorderPainted(true);
+        button.setBorderPainted(false);
         gameBoard.add(button);
     }
 
