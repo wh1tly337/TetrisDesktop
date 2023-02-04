@@ -42,7 +42,6 @@ public class Tetris extends JFrame {
         lineText.setBounds(335, 167, 100, 100);
 
         JLabel holdText = new JLabel("Holded Shape:");
-        // this size need only for macOS
         holdText.setFont(new Font("Arial", Font.BOLD, 20));
         holdText.setForeground(Color.white);
         gameBoard.add(holdText);
@@ -66,7 +65,6 @@ public class Tetris extends JFrame {
         gameOverText.setFont(new Font("Arial", Font.BOLD, 40));
         gameOverText.setForeground(Color.white);
         gameBoard.add(gameOverText);
-//        gameOverText.setBounds(97, 0, 195, 100);
         gameOverText.setBounds(47, 250, 300, 100);
 
         JButton restartBtn = new JButton("RESTART");
@@ -115,8 +113,6 @@ public class Tetris extends JFrame {
 
         setTitle("T E T R I S");
         getContentPane().setBackground(lightBlue);
-        // this size only for macOS
-//        setSize(505, 699);
         setSize(584, 699);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -129,7 +125,7 @@ public class Tetris extends JFrame {
         button.setFocusable(false);
         button.setBackground(blue);
         button.setOpaque(true);
-        button.setBorderPainted(true); // обводка вокруг кнопки
+        button.setBorderPainted(true);
         gameBoard.add(button);
     }
 

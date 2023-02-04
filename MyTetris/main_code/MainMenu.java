@@ -21,8 +21,8 @@ public class MainMenu extends JFrame {
         background.setBounds(0, 40, 550, 120);
         add(background);
 
-        JButton startBtn = new JButton("START GAME"); // making button
-        startBtn.setBounds(162, 200, 225, 75); // set button coords on board
+        JButton startBtn = new JButton("START GAME");
+        startBtn.setBounds(162, 200, 225, 75);
         buttonsStyle(startBtn);
 
         JButton settingsBtn = new JButton("GAME SETTINGS");
@@ -64,7 +64,7 @@ public class MainMenu extends JFrame {
         button.setFont(new Font("Arial", Font.BOLD, 15));
         button.setForeground(Color.white);
         button.setFocusable(false);
-        button.setBorderPainted(true); // обводка вокруг кнопки
+        button.setBorderPainted(true);
         button.setBackground(blue);
         button.setOpaque(true);
         add(button);

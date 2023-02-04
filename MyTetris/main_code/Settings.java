@@ -150,7 +150,7 @@ public class Settings extends JFrame {
         setResizable(false);
         setSize(550, 511);
         setLocationRelativeTo(null);
-        getContentPane().setBackground(lightBlue); //all window background
+        getContentPane().setBackground(lightBlue);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
@@ -158,7 +158,7 @@ public class Settings extends JFrame {
         button.setFont(new Font("Arial", Font.BOLD, 15));
         button.setForeground(Color.white);
         button.setFocusable(false);
-        button.setBorderPainted(true); // обводка вокруг кнопки
+        button.setBorderPainted(true);
         button.setBackground(blue);
         button.setOpaque(true);
         add(button);

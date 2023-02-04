@@ -120,7 +120,7 @@ public class Board extends JPanel {
         nextPiece = new Shape();
         nextPiece.setRandomShape();
         //noinspection IntegerDivisionInFloatingPointContext
-        nextX = BOARD_WIDTH / 2 + 0.7; // +1 old value
+        nextX = BOARD_WIDTH / 2 + 0.7;
         nextY = BOARD_HEIGHT - 0.9;
     }
 
@@ -128,7 +128,7 @@ public class Board extends JPanel {
         curPiece = nextPiece;
         nextPiece();
 
-        curX = BOARD_WIDTH / 2 - 1; // +1 old value
+        curX = BOARD_WIDTH / 2 - 1;
         curY = BOARD_HEIGHT - 1 + curPiece.minY();
 
         if (!tryToMove(curPiece, curX, curY)) {
@@ -148,7 +148,7 @@ public class Board extends JPanel {
                 memory = holdedPiece;
                 holdedPiece = curPiece;
                 curPiece = memory;
-                curX = BOARD_WIDTH / 2 - 1; // +1 old value
+                curX = BOARD_WIDTH / 2 - 1;
                 curY = BOARD_HEIGHT - 1 + curPiece.minY();
             }
             wasHoldChanged = true;
