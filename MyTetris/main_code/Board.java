@@ -117,8 +117,6 @@ public class Board extends JPanel {
         timer.stop();
 
         gameOverText.setText("Game Over");
-        System.out.println(Integer.parseInt(score.getText()));
-        System.out.println(maxRecord);
         if (Integer.parseInt(score.getText()) + 10 > maxRecord) {
             maxRecord = Integer.parseInt(score.getText());
             maxRecordText.setText("New Max Record:");
@@ -130,34 +128,40 @@ public class Board extends JPanel {
         }
     }
 
+    @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     private void nextPiece() {
         nextPiece = new Shape();
         nextPiece.setRandomShape();
 
-        if (nextPiece.getShape() == ShapeList.ZShape) {
-            //noinspection IntegerDivisionInFloatingPointContext
-            nextX = BOARD_WIDTH / 2 + 0.9;
-            nextY = BOARD_HEIGHT - 0.9;
-        } else if (nextPiece.getShape() == ShapeList.SShape) {
-            //noinspection IntegerDivisionInFloatingPointContext
-            nextX = BOARD_WIDTH / 2 + 0.7;
-            nextY = BOARD_HEIGHT - 0.9;
-        } else if (nextPiece.getShape() == ShapeList.SquareShape) {
-            //noinspection IntegerDivisionInFloatingPointContext
-            nextX = BOARD_WIDTH / 2 + 0.7;
-            nextY = BOARD_HEIGHT - 0.9;
-        } else if (nextPiece.getShape() == ShapeList.LShape) {
-            //noinspection IntegerDivisionInFloatingPointContext
-            nextX = BOARD_WIDTH / 2 + 0.7;
-            nextY = BOARD_HEIGHT - 0.9;
-        } else if (nextPiece.getShape() == ShapeList.MirroredLShape) {
-            //noinspection IntegerDivisionInFloatingPointContext
-            nextX = BOARD_WIDTH / 2 + 0.7;
-            nextY = BOARD_HEIGHT - 0.9;
-        } else {
-            //noinspection IntegerDivisionInFloatingPointContext
-            nextX = BOARD_WIDTH / 2 + 0.7;
-            nextY = BOARD_HEIGHT - 0.9;
+        switch (nextPiece.getShape()) {
+            case ZShape -> {
+                nextX = BOARD_WIDTH / 2 + 1.15;
+                nextY = BOARD_HEIGHT - 1.35;
+            }
+            case SShape -> {
+                nextX = BOARD_WIDTH / 2 + 0.25;
+                nextY = BOARD_HEIGHT - 1.35;
+            }
+            case SquareShape -> {
+                nextX = BOARD_WIDTH / 2 + 0.25;
+                nextY = BOARD_HEIGHT - 0.9;
+            }
+            case LShape -> {
+                nextX = BOARD_WIDTH / 2 + 1.1;
+                nextY = BOARD_HEIGHT - 1.4;
+            }
+            case MirroredLShape -> {
+                nextX = BOARD_WIDTH / 2 + 0.3;
+                nextY = BOARD_HEIGHT - 1.4;
+            }
+            case TShape -> {
+                nextX = BOARD_WIDTH / 2 + 0.75;
+                nextY = BOARD_HEIGHT - 0.92;
+            }
+            default -> {
+                nextX = BOARD_WIDTH / 2 + 0.75;
+                nextY = BOARD_HEIGHT - 0.9;
+            }
         }
     }
 
@@ -173,13 +177,42 @@ public class Board extends JPanel {
         }
     }
 
+    @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     private void holdPiece() {
         if (!wasHoldChanged) {
             if (holdedPiece.getShape() == ShapeList.EmptyShape) {
                 holdedPiece = curPiece;
-                //noinspection IntegerDivisionInFloatingPointContext
-                holdedX = BOARD_WIDTH / 2 + 0.7;
-                holdedY = BOARD_HEIGHT - 1.34;
+
+                switch (holdedPiece.getShape()) {
+                    case ZShape -> {
+                        holdedX = BOARD_WIDTH / 2 + 1.27;
+                        holdedY = BOARD_HEIGHT - 1.8;
+                    }
+                    case SShape -> {
+                        holdedX = BOARD_WIDTH / 2 + 0.2;
+                        holdedY = BOARD_HEIGHT - 1.73;
+                    }
+                    case SquareShape -> {
+                        holdedX = BOARD_WIDTH / 2 + 0.27;
+                        holdedY = BOARD_HEIGHT - 1.29;
+                    }
+                    case LShape -> {
+                        holdedX = BOARD_WIDTH / 2 + 1.1;
+                        holdedY = BOARD_HEIGHT - 1.79;
+                    }
+                    case MirroredLShape -> {
+                        holdedX = BOARD_WIDTH / 2 + 0.3;
+                        holdedY = BOARD_HEIGHT - 1.88;
+                    }
+                    case TShape -> {
+                        holdedX = BOARD_WIDTH / 2 + 0.75;
+                        holdedY = BOARD_HEIGHT - 1.35;
+                    }
+                    default -> {
+                        holdedX = BOARD_WIDTH / 2 + 0.75;
+                        holdedY = BOARD_HEIGHT - 1.27;
+                    }
+                }
                 newPiece();
             } else {
                 memory = holdedPiece;
