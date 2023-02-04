@@ -7,6 +7,8 @@ public class Tetris extends JFrame {
     private JLabel gameOverText, gameOnPauseText;
     private JLabel score;
     private JLabel line;
+    Color lightBlue = new Color(144, 173, 205);
+    Color blue = new Color(73, 132, 174);
 
     public Tetris() {
         initUI();
@@ -24,62 +26,55 @@ public class Tetris extends JFrame {
         add(gameBoard);
         gameBoard.setLayout(null);
         gameBoard.start();
-//        gameBoard.setBounds(35, 35, 435, 601);
         gameBoard.setBounds(35, 35, 500, 601);
-        gameBoard.setBackground(Color.GRAY);
+        gameBoard.setBackground(blue);
 
-        // this separator need only for macOS
-//        JSeparator separator = new JSeparator();
-//        separator.setOrientation(SwingConstants.VERTICAL);
-//        separator.setBounds(295, -2, 100, 604);
-//        separator.setBackground(Color.DARK_GRAY);
-//        separator.setForeground(Color.DARK_GRAY);
-//        gameBoard.add(separator);
         JLabel scoreText = new JLabel("Score:");
-        scoreText.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        scoreText.setForeground(Color.black);
+        scoreText.setFont(new Font("Arial", Font.BOLD, 20));
+        scoreText.setForeground(Color.white);
         gameBoard.add(scoreText);
         scoreText.setBounds(335, 121, 100, 100);
 
         JLabel lineText = new JLabel("Line:");
-        lineText.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lineText.setForeground(Color.black);
+        lineText.setFont(new Font("Arial", Font.BOLD, 20));
+        lineText.setForeground(Color.white);
         gameBoard.add(lineText);
         lineText.setBounds(335, 167, 100, 100);
 
         JLabel holdText = new JLabel("Holded Shape:");
         // this size need only for macOS
-        holdText.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        holdText.setForeground(Color.black);
+        holdText.setFont(new Font("Arial", Font.BOLD, 20));
+        holdText.setForeground(Color.white);
         gameBoard.add(holdText);
-        holdText.setBounds(335, 215, 100, 100);
+        holdText.setBounds(335, 215, 150, 100);
 
-        score.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        score.setForeground(Color.black);
+        score.setFont(new Font("Arial", Font.BOLD, 20));
+        score.setForeground(Color.white);
         gameBoard.add(score);
-        score.setBounds(393, 121, 200, 100);
+        score.setBounds(403, 121, 200, 100);
 
-        line.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        line.setForeground(Color.black);
+        line.setFont(new Font("Arial", Font.BOLD, 20));
+        line.setForeground(Color.white);
         gameBoard.add(line);
-        line.setBounds(393, 167, 100, 100);
+        line.setBounds(403, 167, 100, 100);
 
-        gameOnPauseText.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        gameOnPauseText.setForeground(Color.black);
+        gameOnPauseText.setFont(new Font("Arial", Font.BOLD, 20));
+        gameOnPauseText.setForeground(Color.white);
         gameBoard.add(gameOnPauseText);
         gameOnPauseText.setBounds(77, 0, 195, 100);
 
-        gameOverText.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        gameOverText.setForeground(Color.black);
+        gameOverText.setFont(new Font("Arial", Font.BOLD, 40));
+        gameOverText.setForeground(Color.white);
         gameBoard.add(gameOverText);
-        gameOverText.setBounds(97, 0, 195, 100);
+//        gameOverText.setBounds(97, 0, 195, 100);
+        gameOverText.setBounds(47, 250, 300, 100);
 
         JButton restartBtn = new JButton("RESTART");
-        restartBtn.setBounds(332, 504, 170, 40);
+        restartBtn.setBounds(332, 504, 168, 40);
         buttonsStyle(restartBtn, gameBoard);
 
         JButton backToMenuBtn = new JButton("BACK TO MENU");
-        backToMenuBtn.setBounds(332, 560, 170, 40);
+        backToMenuBtn.setBounds(332, 560, 168, 40);
         buttonsStyle(backToMenuBtn, gameBoard);
 
         backToMenuBtn.addActionListener(e -> {
@@ -106,20 +101,20 @@ public class Tetris extends JFrame {
         });
 
         JPanel downRect = new JPanel();
-        downRect.setBackground(Color.DARK_GRAY);
+        downRect.setBackground(lightBlue);
         downRect.setBounds(300, 416, 200, 200);
         gameBoard.add(downRect);
         JPanel middleRect = new JPanel();
-        middleRect.setBackground(Color.DARK_GRAY);
+        middleRect.setBackground(lightBlue);
         middleRect.setBounds(300, 133, 200, 150);
         gameBoard.add(middleRect);
         JPanel leftRect = new JPanel();
-        leftRect.setBackground(Color.DARK_GRAY);
+        leftRect.setBackground(lightBlue);
         leftRect.setBounds(300, 0, 35, 600);
         gameBoard.add(leftRect);
 
         setTitle("T E T R I S");
-        getContentPane().setBackground(Color.DARK_GRAY);
+        getContentPane().setBackground(lightBlue);
         // this size only for macOS
 //        setSize(505, 699);
         setSize(584, 699);
@@ -129,11 +124,12 @@ public class Tetris extends JFrame {
     }
 
     private void buttonsStyle(JButton button, Board gameBoard) {
-        button.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        button.setFont(new Font("Roboto", Font.BOLD, 15));
+        button.setForeground(Color.white);
         button.setFocusable(false);
-        button.setBackground(Color.gray);
+        button.setBackground(blue);
         button.setOpaque(true);
-        button.setBorderPainted(false);
+        button.setBorderPainted(true); // обводка вокруг кнопки
         gameBoard.add(button);
     }
 

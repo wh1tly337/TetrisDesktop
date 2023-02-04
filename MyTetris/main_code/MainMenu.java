@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainMenu extends JFrame {
+    Color blue = new Color(73, 132, 174);
+    Color lightBlue = new Color(144, 173, 205);
+
     public MainMenu() {
         initUI();
     }
@@ -44,24 +47,25 @@ public class MainMenu extends JFrame {
 
         setLayout(null); // need for right working
         JLabel bottomText = new JLabel("Made by Ivanovichev Ivan");
-        bottomText.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        bottomText.setBounds(215, 440, 200, 50);
+        bottomText.setFont(new Font("Arial", Font.PLAIN, 10));
         bottomText.setForeground(Color.black);
+        bottomText.setBounds(215, 440, 200, 50);
         add(bottomText);
 
         setTitle("T E T R I S");
         setResizable(false);
         setSize(550, 511);
         setLocationRelativeTo(null);
-        getContentPane().setBackground(Color.darkGray); //all window background
+        getContentPane().setBackground(lightBlue); //all window background
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     private void buttonsStyle(JButton button) {
-        button.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        button.setFont(new Font("Arial", Font.BOLD, 15));
+        button.setForeground(Color.white);
         button.setFocusable(false);
-        button.setBorderPainted(false); // обводка вокруг кнопки
-        button.setBackground(Color.gray);
+        button.setBorderPainted(true); // обводка вокруг кнопки
+        button.setBackground(blue);
         button.setOpaque(true);
         add(button);
     }

@@ -10,6 +10,8 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Settings extends JFrame {
     Color green = new Color(93, 187, 99);
+    Color lightBlue = new Color(144, 173, 205);
+    Color blue = new Color(73, 132, 174);
     ArrayList<String> values = fileReader();
     boolean sounds = Boolean.parseBoolean(Objects.requireNonNull(values).get(0));
     boolean music = Boolean.parseBoolean(values.get(1));
@@ -26,9 +28,9 @@ public class Settings extends JFrame {
         add(panel);
 
         JLabel soundsText = new JLabel("Sounds");
-        soundsText.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        soundsText.setFont(new Font("Arial", Font.BOLD, 15));
         soundsText.setBounds(80, 75, 100, 30);
-        soundsText.setForeground(Color.black);
+        soundsText.setForeground(Color.white);
         add(soundsText);
 
         JButton soundsOnBtn = new JButton("On");
@@ -44,21 +46,21 @@ public class Settings extends JFrame {
         }
         soundsOnBtn.addActionListener(e -> {
             sounds = true;
-            soundsOffBtn.setBackground(Color.gray);
+            soundsOffBtn.setBackground(blue);
             soundsOnBtn.setBackground(green);
             changeChecker();
         });
         soundsOffBtn.addActionListener(e -> {
             sounds = false;
-            soundsOnBtn.setBackground(Color.gray);
+            soundsOnBtn.setBackground(blue);
             soundsOffBtn.setBackground(green);
             changeChecker();
         });
 
         JLabel musicText = new JLabel("Music");
-        musicText.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        musicText.setFont(new Font("Arial", Font.BOLD, 15));
         musicText.setBounds(80, 145, 100, 30);
-        musicText.setForeground(Color.black);
+        musicText.setForeground(Color.white);
         add(musicText);
 
         JButton musicOnBtn = new JButton("On");
@@ -74,21 +76,21 @@ public class Settings extends JFrame {
         }
         musicOnBtn.addActionListener(e -> {
             music = true;
-            musicOffBtn.setBackground(Color.gray);
+            musicOffBtn.setBackground(blue);
             musicOnBtn.setBackground(green);
             changeChecker();
         });
         musicOffBtn.addActionListener(e -> {
             music = false;
-            musicOnBtn.setBackground(Color.gray);
+            musicOnBtn.setBackground(blue);
             musicOffBtn.setBackground(green);
             changeChecker();
         });
 
         JLabel rotateText = new JLabel("Turn (which way)");
-        rotateText.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        rotateText.setFont(new Font("Arial", Font.BOLD, 15));
         rotateText.setBounds(80, 215, 150, 30);
-        rotateText.setForeground(Color.black);
+        rotateText.setForeground(Color.white);
         add(rotateText);
 
         JButton rotateLeftBtn = new JButton("Left");
@@ -104,13 +106,13 @@ public class Settings extends JFrame {
         }
         rotateRightBtn.addActionListener(e -> {
             turn = "right";
-            rotateLeftBtn.setBackground(Color.gray);
+            rotateLeftBtn.setBackground(blue);
             rotateRightBtn.setBackground(green);
             changeChecker();
         });
         rotateLeftBtn.addActionListener(e -> {
             turn = "left";
-            rotateRightBtn.setBackground(Color.gray);
+            rotateRightBtn.setBackground(blue);
             rotateLeftBtn.setBackground(green);
             changeChecker();
         });
@@ -139,7 +141,7 @@ public class Settings extends JFrame {
 
         setLayout(null);
         JLabel bottomText = new JLabel("Made by Ivanovichev Ivan");
-        bottomText.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        bottomText.setFont(new Font("Arial", Font.PLAIN, 10));
         bottomText.setBounds(215, 440, 200, 50);
         bottomText.setForeground(Color.black);
         add(bottomText);
@@ -148,15 +150,16 @@ public class Settings extends JFrame {
         setResizable(false);
         setSize(550, 511);
         setLocationRelativeTo(null);
-        getContentPane().setBackground(Color.darkGray); //all window background
+        getContentPane().setBackground(lightBlue); //all window background
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     private void buttonsStyle(JButton button) {
-        button.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        button.setFont(new Font("Arial", Font.BOLD, 15));
+        button.setForeground(Color.white);
         button.setFocusable(false);
-        button.setBorderPainted(false); // обводка вокруг кнопки
-        button.setBackground(Color.gray);
+        button.setBorderPainted(true); // обводка вокруг кнопки
+        button.setBackground(blue);
         button.setOpaque(true);
         add(button);
     }
@@ -169,7 +172,7 @@ public class Settings extends JFrame {
 
         if (!Objects.equals(check_sounds, sounds) || !Objects.equals(check_music, music) || !Objects.equals(check_turn, turn)) {
             applyBtn.setText("Apply Changes");
-            applyBtn.setBackground(Color.gray);
+            applyBtn.setBackground(blue);
             alert = true;
         }
     }
