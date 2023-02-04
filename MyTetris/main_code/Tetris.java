@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Tetris extends JFrame {
     private JLabel gameOverText, gameOnPauseText;
-    private JLabel score, finalScore;
+    private JLabel score;
     private JLabel line;
 
     public Tetris() {
@@ -17,7 +17,6 @@ public class Tetris extends JFrame {
         line = new JLabel(" 0");
         gameOnPauseText = new JLabel(" ");
         gameOverText = new JLabel(" ");
-        finalScore = new JLabel(" ");
 
         getContentPane().setLayout(null);
 
@@ -36,7 +35,6 @@ public class Tetris extends JFrame {
 //        separator.setBackground(Color.DARK_GRAY);
 //        separator.setForeground(Color.DARK_GRAY);
 //        gameBoard.add(separator);
-
         JLabel scoreText = new JLabel("Score:");
         scoreText.setFont(new Font("Tahoma", Font.PLAIN, 20));
         scoreText.setForeground(Color.black);
@@ -75,11 +73,6 @@ public class Tetris extends JFrame {
         gameOverText.setForeground(Color.black);
         gameBoard.add(gameOverText);
         gameOverText.setBounds(97, 0, 195, 100);
-
-        finalScore.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        finalScore.setForeground(Color.black);
-        gameBoard.add(finalScore);
-        finalScore.setBounds(97, 30, 195, 100);
 
         JButton restartBtn = new JButton("RESTART");
         restartBtn.setBounds(332, 504, 170, 40);
@@ -150,10 +143,6 @@ public class Tetris extends JFrame {
 
     JLabel getGameOnPauseText() {
         return gameOnPauseText;
-    }
-
-    JLabel getFinalScore() {
-        return finalScore;
     }
 
     JLabel getScore() {

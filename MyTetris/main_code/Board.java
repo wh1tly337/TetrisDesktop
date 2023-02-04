@@ -29,7 +29,7 @@ public class Board extends JPanel {
     private int curX, curY = 0;
     private double nextX, nextY, holdedX, holdedY = 0;
     private JLabel gameOverText, gameOnPauseText;
-    private JLabel score, finalScore;
+    private JLabel score;
     private JLabel line;
     private Shape curPiece, nextPiece, holdedPiece, memory;
     private ShapeList[] board;
@@ -53,7 +53,6 @@ public class Board extends JPanel {
         line = parent.getLine();
         gameOnPauseText = parent.getGameOnPauseText();
         gameOverText = parent.getGameOverText();
-        finalScore = parent.getFinalScore();
         addKeyListener(new TAdapter());
     }
 
@@ -115,8 +114,6 @@ public class Board extends JPanel {
         timer.stop();
 
         gameOverText.setText("Game Over");
-        var msg = String.format("Score: %d", scoreCounter);
-        finalScore.setText(msg);
     }
 
     private void nextPiece() {
@@ -173,8 +170,7 @@ public class Board extends JPanel {
             scoreCounter += level * 10;
             score.setText(String.valueOf(scoreCounter));
         } else {
-            var msg = String.format("Score: %d", scoreCounter);
-            finalScore.setText(msg);
+            finish();
         }
     }
 
@@ -187,8 +183,7 @@ public class Board extends JPanel {
                 score.setText(String.valueOf(scoreCounter));
             }
         } else {
-            var msg = String.format("Score: %d", scoreCounter);
-            finalScore.setText(msg);
+            finish();
         }
     }
 
@@ -222,8 +217,7 @@ public class Board extends JPanel {
                 addSounds("BrickDown");
             }
         } else {
-            var msg = String.format("Score: %d", scoreCounter);
-            finalScore.setText(msg);
+            finish();
         }
     }
 
@@ -303,8 +297,7 @@ public class Board extends JPanel {
                 curPiece.setShape(ShapeList.EmptyShape);
             }
         } else {
-            var msg = String.format("Score: %d", scoreCounter);
-            finalScore.setText(msg);
+            finish();
         }
     }
 
