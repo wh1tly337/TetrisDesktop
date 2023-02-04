@@ -28,7 +28,7 @@ public class Board extends JPanel {
     private int scoreCounter = 0;
     private int curX, curY = 0;
     private double nextX, nextY, holdedX, holdedY = 0;
-    private JLabel gameOverText, gameOnPauseText;
+    private JLabel gameOverText, gameOnPauseText, maxRecordText, maxRecordValue;
     private JLabel score;
     private JLabel line;
     private Shape curPiece, nextPiece, holdedPiece, memory;
@@ -38,6 +38,7 @@ public class Board extends JPanel {
     boolean needSounds = Boolean.parseBoolean(Objects.requireNonNull(values).get(0));
     boolean needMusic = Boolean.parseBoolean(values.get(1));
     String turn = values.get(2);
+    int maxRecord = Integer.parseInt(values.get(3));
 
     public Board(Tetris parent) {
         initBoard(parent);
@@ -51,6 +52,8 @@ public class Board extends JPanel {
         setFocusable(true);
         score = parent.getScore();
         line = parent.getLine();
+        maxRecordText = parent.getMaxRecordText();
+        maxRecordValue = parent.getMaxRecordValue();
         gameOnPauseText = parent.getGameOnPauseText();
         gameOverText = parent.getGameOverText();
         addKeyListener(new TAdapter());
@@ -114,14 +117,48 @@ public class Board extends JPanel {
         timer.stop();
 
         gameOverText.setText("Game Over");
+        System.out.println(Integer.parseInt(score.getText()));
+        System.out.println(maxRecord);
+        if (Integer.parseInt(score.getText()) + 10 > maxRecord) {
+            maxRecord = Integer.parseInt(score.getText());
+            maxRecordText.setText("New Max Record:");
+            maxRecordValue.setText(String.valueOf(maxRecord + 10));
+            Settings.fileWriter(needSounds, needMusic, turn, maxRecord + 10);
+        } else {
+            maxRecordText.setText("Max Record:");
+            maxRecordValue.setText(String.valueOf(maxRecord));
+        }
     }
 
     private void nextPiece() {
         nextPiece = new Shape();
         nextPiece.setRandomShape();
-        //noinspection IntegerDivisionInFloatingPointContext
-        nextX = BOARD_WIDTH / 2 + 0.7;
-        nextY = BOARD_HEIGHT - 0.9;
+
+        if (nextPiece.getShape() == ShapeList.ZShape) {
+            //noinspection IntegerDivisionInFloatingPointContext
+            nextX = BOARD_WIDTH / 2 + 0.9;
+            nextY = BOARD_HEIGHT - 0.9;
+        } else if (nextPiece.getShape() == ShapeList.SShape) {
+            //noinspection IntegerDivisionInFloatingPointContext
+            nextX = BOARD_WIDTH / 2 + 0.7;
+            nextY = BOARD_HEIGHT - 0.9;
+        } else if (nextPiece.getShape() == ShapeList.SquareShape) {
+            //noinspection IntegerDivisionInFloatingPointContext
+            nextX = BOARD_WIDTH / 2 + 0.7;
+            nextY = BOARD_HEIGHT - 0.9;
+        } else if (nextPiece.getShape() == ShapeList.LShape) {
+            //noinspection IntegerDivisionInFloatingPointContext
+            nextX = BOARD_WIDTH / 2 + 0.7;
+            nextY = BOARD_HEIGHT - 0.9;
+        } else if (nextPiece.getShape() == ShapeList.MirroredLShape) {
+            //noinspection IntegerDivisionInFloatingPointContext
+            nextX = BOARD_WIDTH / 2 + 0.7;
+            nextY = BOARD_HEIGHT - 0.9;
+        } else {
+            //noinspection IntegerDivisionInFloatingPointContext
+            nextX = BOARD_WIDTH / 2 + 0.7;
+            nextY = BOARD_HEIGHT - 0.9;
+        }
     }
 
     private void newPiece() {

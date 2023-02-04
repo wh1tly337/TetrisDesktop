@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Tetris extends JFrame {
-    private JLabel gameOverText, gameOnPauseText;
+    private JLabel gameOverText, gameOnPauseText, maxRecordText, maxRecordValue;
     private JLabel score;
     private JLabel line;
     Color lightBlue = new Color(144, 173, 205);
@@ -19,6 +19,8 @@ public class Tetris extends JFrame {
         line = new JLabel(" 0");
         gameOnPauseText = new JLabel(" ");
         gameOverText = new JLabel(" ");
+        maxRecordText = new JLabel(" ");
+        maxRecordValue = new JLabel(" ");
 
         getContentPane().setLayout(null);
 
@@ -47,6 +49,16 @@ public class Tetris extends JFrame {
         gameBoard.add(holdText);
         holdText.setBounds(335, 215, 150, 100);
 
+        maxRecordText.setFont(new Font("Arial", Font.BOLD, 20));
+        maxRecordText.setForeground(Color.white);
+        gameBoard.add(maxRecordText);
+        maxRecordText.setBounds(335, 395, 210, 100);
+
+        maxRecordValue.setFont(new Font("Arial", Font.BOLD, 20));
+        maxRecordValue.setForeground(Color.white);
+        gameBoard.add(maxRecordValue);
+        maxRecordValue.setBounds(335, 425, 210, 100);
+
         score.setFont(new Font("Arial", Font.BOLD, 20));
         score.setForeground(Color.white);
         gameBoard.add(score);
@@ -57,10 +69,10 @@ public class Tetris extends JFrame {
         gameBoard.add(line);
         line.setBounds(403, 167, 100, 100);
 
-        gameOnPauseText.setFont(new Font("Arial", Font.BOLD, 20));
+        gameOnPauseText.setFont(new Font("Arial", Font.BOLD, 40));
         gameOnPauseText.setForeground(Color.white);
         gameBoard.add(gameOnPauseText);
-        gameOnPauseText.setBounds(77, 0, 195, 100);
+        gameOnPauseText.setBounds(2, 250, 300, 100);
 
         gameOverText.setFont(new Font("Arial", Font.BOLD, 40));
         gameOverText.setForeground(Color.white);
@@ -135,6 +147,14 @@ public class Tetris extends JFrame {
 
     JLabel getGameOnPauseText() {
         return gameOnPauseText;
+    }
+
+    JLabel getMaxRecordText() {
+        return maxRecordText;
+    }
+
+    JLabel getMaxRecordValue() {
+        return maxRecordValue;
     }
 
     JLabel getScore() {

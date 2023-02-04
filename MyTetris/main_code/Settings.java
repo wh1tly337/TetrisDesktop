@@ -16,6 +16,7 @@ public class Settings extends JFrame {
     boolean sounds = Boolean.parseBoolean(Objects.requireNonNull(values).get(0));
     boolean music = Boolean.parseBoolean(values.get(1));
     String turn = values.get(2);
+    int maxRecord = Integer.parseInt(values.get(3));
     JButton applyBtn = new JButton("Apply Changes");
     boolean alert = false;
 
@@ -121,7 +122,7 @@ public class Settings extends JFrame {
         buttonsStyle(applyBtn);
         applyBtn.addActionListener(e -> {
             alert = false;
-            fileWriter();
+            fileWriter(sounds, music, turn, maxRecord);
             applyBtn.setText("Saved");
             applyBtn.setBackground(green);
         });
@@ -201,17 +202,19 @@ public class Settings extends JFrame {
         return null;
     }
 
-    public void fileWriter() {
+    static void fileWriter(boolean needSounds, boolean needMusic, String turn, int maxRecord) {
         try {
             FileWriter writer = new FileWriter("MyTetris\\settings.txt");
 //            FileWriter writer = new FileWriter("/Users/user/IdeaProjects/TetrisMacOS/MyTetris/settings.txt");
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
-            bufferedWriter.write("sounds " + sounds);
+            bufferedWriter.write("sounds " + needSounds);
             bufferedWriter.newLine();
-            bufferedWriter.write("music " + music);
+            bufferedWriter.write("music " + needMusic);
             bufferedWriter.newLine();
             bufferedWriter.write("rotate " + turn);
+            bufferedWriter.newLine();
+            bufferedWriter.write("max_record " + maxRecord);
 
             bufferedWriter.close();
         } catch (IOException e) {
