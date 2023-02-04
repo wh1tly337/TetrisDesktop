@@ -188,8 +188,7 @@ public class Settings extends JFrame {
         BufferedReader reader;
 
         try {
-            reader = new BufferedReader(new FileReader("MyTetris\\settings.txt"));
-//            reader = new BufferedReader(new FileReader("/Users/user/IdeaProjects/TetrisMacOS/MyTetris/settings.txt"));
+            reader = new BufferedReader(new FileReader("MyTetris/settings.txt"));
             String string = reader.readLine();
             ArrayList<String> values = new ArrayList<>();
 
