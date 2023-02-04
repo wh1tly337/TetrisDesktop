@@ -185,7 +185,7 @@ public class Board extends JPanel {
 
                 switch (holdedPiece.getShape()) {
                     case ZShape -> {
-                        holdedX = BOARD_WIDTH / 2 + 1.27;
+                        holdedX = BOARD_WIDTH / 2 + 1.15;
                         holdedY = BOARD_HEIGHT - 1.8;
                     }
                     case SShape -> {
@@ -213,6 +213,7 @@ public class Board extends JPanel {
                         holdedY = BOARD_HEIGHT - 1.27;
                     }
                 }
+
                 newPiece();
             } else {
                 memory = holdedPiece;

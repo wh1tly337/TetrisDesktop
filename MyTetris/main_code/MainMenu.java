@@ -70,7 +70,7 @@ public class MainMenu extends JFrame {
         button.setFont(new Font("Arial", Font.BOLD, 15));
         button.setForeground(Color.white);
         button.setFocusable(false);
-        button.setBorderPainted(true);
+        button.setBorderPainted(false);
         button.setBackground(blue);
         button.setOpaque(true);
         add(button);

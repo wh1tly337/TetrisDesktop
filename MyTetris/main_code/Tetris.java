@@ -143,7 +143,7 @@ public class Tetris extends JFrame {
         button.setFocusable(false);
         button.setBackground(blue);
         button.setOpaque(true);
-        button.setBorderPainted(true);
+        button.setBorderPainted(false);
         gameBoard.add(button);
     }
 
