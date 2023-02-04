@@ -177,52 +177,55 @@ public class Board extends JPanel {
         }
     }
 
-    @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     private void holdPiece() {
         if (!wasHoldChanged) {
             if (holdedPiece.getShape() == ShapeList.EmptyShape) {
                 holdedPiece = curPiece;
-
-                switch (holdedPiece.getShape()) {
-                    case ZShape -> {
-                        holdedX = BOARD_WIDTH / 2 + 1.15;
-                        holdedY = BOARD_HEIGHT - 1.8;
-                    }
-                    case SShape -> {
-                        holdedX = BOARD_WIDTH / 2 + 0.2;
-                        holdedY = BOARD_HEIGHT - 1.73;
-                    }
-                    case SquareShape -> {
-                        holdedX = BOARD_WIDTH / 2 + 0.27;
-                        holdedY = BOARD_HEIGHT - 1.29;
-                    }
-                    case LShape -> {
-                        holdedX = BOARD_WIDTH / 2 + 1.1;
-                        holdedY = BOARD_HEIGHT - 1.79;
-                    }
-                    case MirroredLShape -> {
-                        holdedX = BOARD_WIDTH / 2 + 0.3;
-                        holdedY = BOARD_HEIGHT - 1.88;
-                    }
-                    case TShape -> {
-                        holdedX = BOARD_WIDTH / 2 + 0.75;
-                        holdedY = BOARD_HEIGHT - 1.35;
-                    }
-                    default -> {
-                        holdedX = BOARD_WIDTH / 2 + 0.75;
-                        holdedY = BOARD_HEIGHT - 1.27;
-                    }
-                }
-
+                holdedPieceCoords(holdedPiece);
                 newPiece();
             } else {
                 memory = holdedPiece;
                 holdedPiece = curPiece;
+                holdedPieceCoords(holdedPiece);
                 curPiece = memory;
                 curX = BOARD_WIDTH / 2 - 1;
                 curY = BOARD_HEIGHT - 1 + curPiece.minY();
             }
             wasHoldChanged = true;
+        }
+    }
+
+    @SuppressWarnings("IntegerDivisionInFloatingPointContext")
+    private void holdedPieceCoords(Shape holdedPiece) {
+        switch (holdedPiece.getShape()) {
+            case ZShape -> {
+                holdedX = BOARD_WIDTH / 2 + 1.15;
+                holdedY = BOARD_HEIGHT - 1.8;
+            }
+            case SShape -> {
+                holdedX = BOARD_WIDTH / 2 + 0.2;
+                holdedY = BOARD_HEIGHT - 1.73;
+            }
+            case SquareShape -> {
+                holdedX = BOARD_WIDTH / 2 + 0.27;
+                holdedY = BOARD_HEIGHT - 1.29;
+            }
+            case LShape -> {
+                holdedX = BOARD_WIDTH / 2 + 1.1;
+                holdedY = BOARD_HEIGHT - 1.79;
+            }
+            case MirroredLShape -> {
+                holdedX = BOARD_WIDTH / 2 + 0.3;
+                holdedY = BOARD_HEIGHT - 1.88;
+            }
+            case TShape -> {
+                holdedX = BOARD_WIDTH / 2 + 0.75;
+                holdedY = BOARD_HEIGHT - 1.35;
+            }
+            default -> {
+                holdedX = BOARD_WIDTH / 2 + 0.75;
+                holdedY = BOARD_HEIGHT - 1.27;
+            }
         }
     }
 
