@@ -79,6 +79,9 @@ public class MainMenu extends JFrame {
     public static void main(String[] args) {
         MainMenu mainMenu = new MainMenu();
         mainMenu.setVisible(true);
+        mainMenu.dispose();
+        MainMenu mainMenu2 = new MainMenu();
+        mainMenu2.setVisible(true);
     }
 }
 
