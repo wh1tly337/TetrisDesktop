@@ -1,5 +1,7 @@
 package main_code;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -22,6 +24,10 @@ public class Settings extends JFrame {
 
     public Settings() {
         initUI();
+        FlatLightLaf.setup();
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        getRootPane().putClientProperty("JRootPane.titleBarBackground", lightBlue);
+        getRootPane().putClientProperty("JRootPane.titleBarForeground", Color.white);
     }
 
     public final void initUI() {
@@ -147,7 +153,7 @@ public class Settings extends JFrame {
         bottomText.setForeground(Color.black);
         add(bottomText);
 
-        setTitle("SETTINGS");
+        setTitle("T E T R I S");
         setResizable(false);
         setSize(550, 511);
         setLocationRelativeTo(null);

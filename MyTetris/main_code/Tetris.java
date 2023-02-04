@@ -1,5 +1,7 @@
 package main_code;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,6 +14,10 @@ public class Tetris extends JFrame {
 
     public Tetris() {
         initUI();
+        FlatLightLaf.setup();
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        getRootPane().putClientProperty("JRootPane.titleBarBackground", lightBlue);
+        getRootPane().putClientProperty("JRootPane.titleBarForeground", Color.white);
     }
 
     private void initUI() {

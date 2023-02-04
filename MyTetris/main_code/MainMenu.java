@@ -1,5 +1,7 @@
 package main_code;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,6 +11,10 @@ public class MainMenu extends JFrame {
 
     public MainMenu() {
         initUI();
+        FlatLightLaf.setup();
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        getRootPane().putClientProperty("JRootPane.titleBarBackground", lightBlue);
+        getRootPane().putClientProperty("JRootPane.titleBarForeground", Color.white);
     }
 
     public final void initUI() {
