@@ -1,6 +1,6 @@
-package main_code;
+package mainCode;
 
-import main_code.Shape.ShapeList;
+import mainCode.Shape.ShapeList;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -509,13 +509,13 @@ public class Board extends JPanel {
     private void addSounds(String fromWhere) {
         if (needSounds) {
             if (Objects.equals(fromWhere, "BrickDown")) {
-                String soundName = "MyTetris/music_sounds/BrickDownSound.wav";
+                String soundName = "Applications/Tetris.app/Contents/app/MyTetris/music_sounds/BrickDownSound.wav";
                 music(soundName, false);
             } else if (Objects.equals(fromWhere, "ClearLine")) {
-                String soundName = "MyTetris/music_sounds/ClearLineSound.wav";
+                String soundName = "Applications/Tetris.app/Contents/app/MyTetris/music_sounds/ClearLineSound.wav";
                 music(soundName, false);
             } else if (Objects.equals(fromWhere, "GameOver")) {
-                String soundName = "MyTetris/music_sounds/GameOverSound.wav";
+                String soundName = "Applications/Tetris.app/Contents/app/MyTetris/music_sounds/GameOverSound.wav";
                 music(soundName, false);
             }
         }
@@ -523,7 +523,7 @@ public class Board extends JPanel {
 
     private void addMusic() {
         if (needMusic) {
-            String soundName = "MyTetris/music_sounds/TETRIS_music.wav";
+            String soundName = "Applications/Tetris.app/Contents/app/MyTetris/music_sounds/TETRIS_music.wav";
             music(soundName, true);
         }
     }
@@ -546,7 +546,7 @@ public class Board extends JPanel {
             throw new RuntimeException(e);
         }
         FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(-40.0f);
+        gainControl.setValue(-20.0f);
 
         if (needLoop) {
             music = clip;

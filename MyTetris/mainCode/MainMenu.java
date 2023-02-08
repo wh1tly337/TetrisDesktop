@@ -1,4 +1,4 @@
-package main_code;
+package mainCode;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
@@ -21,7 +21,7 @@ public class MainMenu extends JFrame {
         JPanel panel = new JPanel();
         add(panel);
 
-        ImageIcon logo = new ImageIcon("MyTetris/TETRIS_logo.png");
+        ImageIcon logo = new ImageIcon("Applications/Tetris.app/Contents/app/MyTetris/TETRIS_logo.png");
         JLabel background = new JLabel("", logo, JLabel.CENTER);
         background.setBounds(0, 40, 530, 120);
         add(background);
@@ -78,9 +78,9 @@ public class MainMenu extends JFrame {
     public static void main(String[] args) {
         MainMenu mainMenu = new MainMenu();
         mainMenu.setVisible(true);
-        mainMenu.dispose();
-        MainMenu mainMenu2 = new MainMenu();
-        mainMenu2.setVisible(true);
+//        mainMenu.dispose();
+//        MainMenu mainMenu2 = new MainMenu();
+//        mainMenu2.setVisible(true);
     }
 }
 

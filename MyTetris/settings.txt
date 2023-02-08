@@ -1,4 +1,4 @@
 sounds true
-music false
+music true
 rotate right
 max_record 1270

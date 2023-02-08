@@ -1,4 +1,4 @@
-package main_code;
+package mainCode;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
@@ -188,7 +188,7 @@ public class Settings extends JFrame {
         BufferedReader reader;
 
         try {
-            reader = new BufferedReader(new FileReader("MyTetris/settings.txt"));
+            reader = new BufferedReader(new FileReader("Applications/Tetris.app/Contents/app/MyTetris/settings.txt"));
             String string = reader.readLine();
             ArrayList<String> values = new ArrayList<>();
 
@@ -209,8 +209,7 @@ public class Settings extends JFrame {
 
     static void fileWriter(boolean needSounds, boolean needMusic, String turn, int maxRecord) {
         try {
-            FileWriter writer = new FileWriter("MyTetris\\settings.txt");
-//            FileWriter writer = new FileWriter("/Users/user/IdeaProjects/TetrisMacOS/MyTetris/settings.txt");
+            FileWriter writer = new FileWriter("Applications/Tetris.app/Contents/app/MyTetris/settings.txt");
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
             bufferedWriter.write("sounds " + needSounds);
